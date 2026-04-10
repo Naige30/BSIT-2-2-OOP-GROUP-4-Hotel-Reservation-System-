@@ -14,7 +14,11 @@ public class HOTELRESERVATIONSYSTEM {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+     loginpage lp=new loginpage();
+     lp.setVisible(true);
+     
+    // hotelmenu hm=new hotelmenu();
+     //hm.setVisible(true);
     }
     
 }
