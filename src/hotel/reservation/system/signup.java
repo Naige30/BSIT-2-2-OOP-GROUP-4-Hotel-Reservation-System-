@@ -27,15 +27,23 @@ public class signup extends JFrame implements ActionListener {
         add(titlelbl);
         
         userlbl=new JLabel("Username:");
-        userlbl.setBounds(30,55,90,60);
+        userlbl.setBounds(30,70,90,30);
         add(userlbl);
         
         userinp=new JTextField();
         userinp.setBounds(110,70,200,30);
         add(userinp);
         
-        passinp=new JPasswordField();
+        passlbl=new JLabel("Password:");
+        passlbl.setBounds(30,150,90,30);
+        add(passlbl);
         
+        
+        passinp=new JPasswordField();
+        passinp.setBounds(110,120,200,30);
+        add(passinp);
+        
+       
         
 
         
