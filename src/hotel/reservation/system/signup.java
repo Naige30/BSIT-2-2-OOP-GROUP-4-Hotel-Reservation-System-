@@ -34,6 +34,7 @@ public class signup extends JFrame implements ActionListener {
         userinp.setBounds(110,70,200,30);
         add(userinp);
         
+        passinp=new JPasswordField();
         
         
 
