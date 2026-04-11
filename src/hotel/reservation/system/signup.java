@@ -13,8 +13,8 @@ import java.awt.*;
  * @author Naige
  */
 public class signup extends JFrame implements ActionListener {
-    private JTextField userinp,emailinp,numberinp,ageinp;
-    private JLabel userlbl,passlbl,emaillbl,numberlbl,agelbl,titlelbl;
+    private JTextField userinp,emailinp,numberinp;
+    private JLabel userlbl,passlbl,emaillbl,numberlbl,titlelbl;
     private JButton submitbtn;    
     private JPasswordField passinp; 
     signup(){
@@ -50,6 +50,18 @@ public class signup extends JFrame implements ActionListener {
         emailinp=new JTextField();
         emailinp.setBounds(110,170,200,30);
         add(emailinp);
+        
+        numberlbl=new JLabel("Contact No.");
+        numberlbl.setBounds(30,220,200,30);
+        add(numberlbl);
+        
+        numberinp=new JTextField();
+        numberinp.setBounds(110,220,200,30);
+        add(numberinp);
+        
+        submitbtn=new JButton("Submit");
+        submitbtn.setBounds(180,270,90,30);
+        add(submitbtn);
        
                 
         
