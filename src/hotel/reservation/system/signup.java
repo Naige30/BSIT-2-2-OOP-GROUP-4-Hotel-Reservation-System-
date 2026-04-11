@@ -35,7 +35,7 @@ public class signup extends JFrame implements ActionListener {
         add(userinp);
         
         passlbl=new JLabel("Password:");
-        passlbl.setBounds(30,110,90,30);
+        passlbl.setBounds(30,117,90,30);
         add(passlbl);
         
         
@@ -43,12 +43,12 @@ public class signup extends JFrame implements ActionListener {
         passinp.setBounds(110,120,200,30);
         add(passinp);
         
-        emaillbl=new JLabel("Email Address");
-        emaillbl.setBounds(35,15,200,30);
+        emaillbl=new JLabel("Email:");
+        emaillbl.setBounds(30,170,200,30);
         add(emaillbl);
         
         emailinp=new JTextField();
-        emailinp.setBounds(110,180,200,30);
+        emailinp.setBounds(110,170,200,30);
         add(emailinp);
        
                 
