@@ -16,42 +16,57 @@ import javax.swing.*;
 public class loginpage extends JFrame implements ActionListener {
     private JTextField user;
     private JButton Login,signup;
-    private JLabel header,username,password;
+    private JLabel header,subheader,username,password;
     private JPasswordField pass;
+    private JSeparator line;
     
     
     loginpage(){
         
        
-        setSize(400,300);
+        setSize(800,600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(null);
         getContentPane().setBackground(new Color(245,245,245));
+        setResizable(false);
+        setLocationRelativeTo(null);
         
         
-        header = new JLabel("Login Page",SwingConstants.CENTER);
-        header.setBounds(0,25,400,50);
-        header.setForeground(new Color(15,32,64));
+        header = new JLabel("Welcome to __",SwingConstants.LEFT);
+        header.setFont(new Font("SansSerif",Font.BOLD, 32));
+        header.setBounds(430, 60, 300, 45);
+        header.setForeground(new Color(28, 28, 28));
         add(header);
         
+        subheader = new JLabel("Let us begin your journey into timeless luxury.");
+        subheader.setFont(new Font("SansSerif", Font.PLAIN, 13));
+        subheader.setBounds(430, 105, 350, 20);
+        subheader.setForeground(new Color(120, 120, 120));
+        add(subheader);
+        
+        line = new JSeparator();
+        line.setBounds(430, 145, 300, 1);
+        line.setForeground(new Color(230, 230, 230));
+        add(line);
+        
         username=new JLabel("Username:");
-        username.setBounds(30,70,90,30);
+        username.setBounds(430, 180, 200, 20);
         add(username);
         
         user=new JTextField();
-        user.setBounds(100,70,200,30);
+        user.setBounds(430, 205, 300, 40);
         add(user);
         
         pass=new JPasswordField();
-        pass.setBounds(100,120,200,30);
+        pass.setBounds(430, 285, 300, 40);
         add(pass);
         
         password=new JLabel("Password:");
-        password.setBounds(30,120,100,30);
+        password.setBounds(430, 260, 200, 20);
         add(password);
         
         Login=new JButton("Login");
-        Login.setBounds(80,180,100,30);
+        Login.setBounds(430, 350, 300, 45);
         Login.setBackground(new Color(15,32,64));
         Login.setForeground(Color.white);
         Login.setFocusPainted(false);
@@ -59,15 +74,12 @@ public class loginpage extends JFrame implements ActionListener {
         Login.addActionListener(this);
         
         signup=new JButton("Sign Up");
-        signup.setBounds(220,180,100,30);
+        signup.setBounds(430, 410, 300, 45);
         signup.setBackground(new Color(64,181,173));
         signup.setForeground(Color.white);
         signup.setFocusPainted(false);
         add(signup);
         signup.addActionListener(this);
-        
-        
-        
         
         
         
