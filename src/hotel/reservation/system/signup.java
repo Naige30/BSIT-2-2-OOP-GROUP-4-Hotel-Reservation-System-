@@ -60,7 +60,7 @@ public class signup extends JFrame implements ActionListener {
         add(numberinp);
         
         submitbtn=new JButton("Submit");
-        submitbtn.setBounds(180,270,90,30);
+        submitbtn.setBounds(170,270,90,30);
         add(submitbtn);
        
                 
