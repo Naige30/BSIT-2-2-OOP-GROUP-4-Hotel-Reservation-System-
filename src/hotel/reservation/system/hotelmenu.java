@@ -23,6 +23,7 @@ public class hotelmenu extends JFrame implements ActionListener {
         setSize(600,600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(null);
+        setLocationRelativeTo(null);
         
         welcometxt=new JLabel ("Welcome to Hotel App",SwingConstants.CENTER);
         welcometxt.setBounds(0,50,600,30);

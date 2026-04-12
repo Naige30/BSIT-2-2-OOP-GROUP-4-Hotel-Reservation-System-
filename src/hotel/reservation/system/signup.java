@@ -21,6 +21,7 @@ public class signup extends JFrame implements ActionListener {
         setSize(374,550);
         setLayout(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
         
         titlelbl = new JLabel("Sign Up",SwingConstants.CENTER);
         titlelbl.setBounds(0,20,400,50);
