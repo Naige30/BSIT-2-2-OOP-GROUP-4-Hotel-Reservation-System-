@@ -90,6 +90,7 @@ public class signup extends JFrame implements ActionListener {
         submitbtn=new JButton("Submit");
         submitbtn.setBounds(140,450,100,30);
         add(submitbtn);
+        submitbtn.addActionListener(this);
        
                 
         
@@ -100,7 +101,11 @@ public class signup extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if(e.getSource()==submitbtn){
+            dispose();
+            loginpage lp=new loginpage();
+            lp.setVisible(true);
+        }
     }
     
 }
