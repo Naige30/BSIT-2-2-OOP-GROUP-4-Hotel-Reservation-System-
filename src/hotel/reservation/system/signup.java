@@ -14,15 +14,13 @@ import java.awt.*;
  * @author Naige
  */
 public class signup extends JFrame implements ActionListener {
-    private JTextField userinp,emailinp,numberinp;
-    private JLabel userlbl,passlbl,emaillbl,numberlbl,titlelbl,bdaylbl;
+   
+   
     private JButton submitbtn;    
     private JPasswordField passinp; 
     private JComboBox<String>monthBox,dayBox,yearBox;
     private JTextField userinp,emailinp,numberinp,ageinp;
-    private JLabel userlbl,passlbl,emaillbl,numberlbl,agelbl,titlelbl,subTitle,hint,footer;
-    private JButton submitbtn;    
-    private JPasswordField passinp;
+    private JLabel userlbl,passlbl,emaillbl,numberlbl,agelbl,titlelbl,subTitle,hint,footer, bdaylbl;
     private ImageIcon originalIcon;
     signup(){
         setSize(400,550);
@@ -67,15 +65,15 @@ public class signup extends JFrame implements ActionListener {
         add(emailinp);
 
         
-        passlbl = new JLabel("Password");
-        passlbl.setFont(new Font("SansSerif", Font.BOLD, 12));
-        passlbl.setBounds(30, 275, 100, 20);
-        add(passlbl);
+//        passlbl = new JLabel("Password");
+//        passlbl.setFont(new Font("SansSerif", Font.BOLD, 12));
+//        passlbl.setBounds(30, 275, 100, 20);
+//        add(passlbl);
 
-        passinp = new JPasswordField();
-        passinp.setBounds(30, 300, 320, 38);
-        passinp.setBorder(new LineBorder(new Color(225, 225, 225), 1));
-        add(passinp);
+//        passinp = new JPasswordField();
+//        passinp.setBounds(30, 300, 320, 38);
+//        passinp.setBorder(new LineBorder(new Color(225, 225, 225), 1));
+//        add(passinp);
 
         hint = new JLabel("Must be at least 8 characters.");
         hint.setFont(new Font("SansSerif", Font.PLAIN, 11));
@@ -98,17 +96,11 @@ public class signup extends JFrame implements ActionListener {
         
 
         
-        passinp=new JPasswordField();
-        passinp.setBounds(110,120,200,30);
-        add(passinp);
+       
         
-        emaillbl=new JLabel("Email:");
-        emaillbl.setBounds(30,170,200,30);
-        add(emaillbl);
+     
         
-        emailinp=new JTextField();
-        emailinp.setBounds(110,170,200,30);
-        add(emailinp);
+       
         
         numberlbl=new JLabel("Contact No.");
         numberlbl.setBounds(30,220,200,30);
@@ -145,10 +137,6 @@ public class signup extends JFrame implements ActionListener {
         add(yearBox);
         
       
-        submitbtn=new JButton("Submit");
-        submitbtn.setBounds(140,450,100,30);
-        add(submitbtn);
-        submitbtn.addActionListener(this);
        
                 
         
