@@ -7,6 +7,7 @@ package hotel.reservation.system;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.border.LineBorder;
 import javax.swing.*;
 
 /**
@@ -16,58 +17,106 @@ import javax.swing.*;
 public class loginpage extends JFrame implements ActionListener {
     private JTextField user;
     private JButton Login,signup;
-    private JLabel header,username,password;
+    private JLabel header,header2,subheader,username,password,sideImage,option1;
     private JPasswordField pass;
+    private JSeparator line;
+    private ImageIcon originalIcon;
     
     
     loginpage(){
         
        
-        setSize(400,300);
+        setSize(800,600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(null);
-        getContentPane().setBackground(new Color(245,245,245));
+        getContentPane().setBackground(Color.WHITE);
+        setResizable(false);
+        setLocationRelativeTo(null);
         
         
-        header = new JLabel("Login Page",SwingConstants.CENTER);
-        header.setBounds(0,25,400,50);
-        header.setForeground(new Color(15,32,64));
+        setIconImage(new ImageIcon(getClass().getResource("logo.png")).getImage());
+        originalIcon = new ImageIcon(getClass().getResource("hotel.jpg"));
+        Image img = originalIcon.getImage();
+        
+
+        header = new JLabel("Welcome to Giovanni",SwingConstants.LEFT);
+        header.setFont(new Font("SansSerif",Font.BOLD, 28));
+        header.setBounds(430, 40, 350, 40);
+        header.setForeground(Color.BLACK);
         add(header);
         
-        username=new JLabel("Username:");
-        username.setBounds(30,70,90,30);
+        header2 = new JLabel("Madrigal Grand Hotel", SwingConstants.LEFT);
+        header2.setFont(new Font("SansSerif", Font.BOLD, 28));
+        header2.setBounds(430, 75, 350, 40);
+        header2.setForeground(Color.BLACK);
+        add(header2);
+        
+        
+        Image scaledImg = img.getScaledInstance(350, 540, Image.SCALE_SMOOTH);
+        ImageIcon finalIcon = new ImageIcon(scaledImg);
+        
+        sideImage = new JLabel(finalIcon);
+        sideImage.setBounds(20, 10, 350, 540); 
+        add(sideImage);
+        
+
+        subheader = new JLabel("Let us begin your journey into timeless luxury.");
+        subheader.setFont(new Font("Serif", Font.ITALIC, 16));
+        subheader.setBounds(430, 125, 350, 25);
+        subheader.setForeground(new Color(100, 100, 100));
+        add(subheader);
+        
+        line = new JSeparator();
+        line.setBounds(430, 160, 300, 1);
+        line.setForeground(new Color(230, 230, 230));
+        add(line);
+        
+        username=new JLabel("USERNAME:");
+        username.setFont(new Font("SansSerif", Font.BOLD, 11));
+        username.setForeground(new Color(150, 150, 150));
+        username.setBounds(430, 180, 200, 20);
         add(username);
         
         user=new JTextField();
-        user.setBounds(100,70,200,30);
+        user.setBorder(new LineBorder(new Color(225, 225, 225), 1));
+        user.setBounds(430, 205, 300, 40);
         add(user);
         
         pass=new JPasswordField();
-        pass.setBounds(100,120,200,30);
+        pass.setBorder(new LineBorder(new Color(225, 225, 225), 1));
+        pass.setBounds(430, 285, 300, 40);
         add(pass);
         
-        password=new JLabel("Password:");
-        password.setBounds(30,120,100,30);
+        password=new JLabel("PASSWORD:");
+        password.setFont(new Font("SansSerif", Font.BOLD, 11));
+        password.setForeground(new Color(150, 150, 150));
+        password.setBounds(430, 265, 200, 20);
         add(password);
         
         Login=new JButton("Login");
-        Login.setBounds(80,180,100,30);
-        Login.setBackground(new Color(15,32,64));
+        Login.setFont(new Font("SansSerif", Font.BOLD, 14));
+        Login.setBounds(430, 360, 300, 45);
+        Login.setBackground(new Color(27,60,83));
         Login.setForeground(Color.white);
         Login.setFocusPainted(false);
         add(Login);
         Login.addActionListener(this);
         
+        option1 = new JLabel("No account? Sign up to save your orders and check out faster.");
+        option1.setFont(new Font("SansSerif", Font.PLAIN, 10));
+        option1.setForeground(new Color(120, 120, 120));
+        option1.setHorizontalAlignment(SwingConstants.CENTER); 
+        option1.setBounds(430, 410, 300, 20); 
+        add(option1);
+        
         signup=new JButton("Sign Up");
-        signup.setBounds(220,180,100,30);
-        signup.setBackground(new Color(64,181,173));
+        signup.setFont(new Font("SansSerif", Font.BOLD, 14));
+        signup.setBounds(430, 440, 300, 45);
+        signup.setBackground(new Color(69,104,130));
         signup.setForeground(Color.white);
         signup.setFocusPainted(false);
         add(signup);
         signup.addActionListener(this);
-        
-        
-        
         
         
         

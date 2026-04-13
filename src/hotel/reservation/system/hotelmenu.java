@@ -13,7 +13,7 @@ import java.awt.*;
  * @author Naige
  */
 public class hotelmenu extends JFrame implements ActionListener {
-    private JButton reservebtn,viewbtn,cancelbtn,searchbtn;
+    private JButton reservebtn,viewbtn,cancelbtn,searchbtn,logoutbtn;
     private JLabel welcometxt;
     private JTextArea hotels;
     
@@ -23,6 +23,7 @@ public class hotelmenu extends JFrame implements ActionListener {
         setSize(600,600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(null);
+        setLocationRelativeTo(null);
         
         welcometxt=new JLabel ("Welcome to Hotel App",SwingConstants.CENTER);
         welcometxt.setBounds(0,50,600,30);
@@ -49,6 +50,12 @@ public class hotelmenu extends JFrame implements ActionListener {
         hotels.setEditable(false);
         add(hotels);
         
+        logoutbtn=new JButton("Log Out");
+        logoutbtn.setBounds(35,450,100,30);
+        add(logoutbtn);
+        logoutbtn.addActionListener(this);
+        
+        
         reservebtn.addActionListener(this);
         
     }
@@ -56,10 +63,10 @@ public class hotelmenu extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-       if (e.getSource() == reservebtn) {
-           reservepage rs = new reservepage();
-           rs.setVisible(true);
+       if(e.getSource()==logoutbtn){
            dispose();
+           loginpage lp=new loginpage();
+           lp.setVisible(true);
        }
     }
     
