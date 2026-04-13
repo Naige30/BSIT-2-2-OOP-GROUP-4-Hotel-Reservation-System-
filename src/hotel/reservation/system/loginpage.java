@@ -125,10 +125,17 @@ public class loginpage extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==Login){
+            if(user.getText().equals("admin")&&pass.getText().equals("admin123")){;
             dispose();
             JOptionPane.showMessageDialog(this, "Log in Successful");
             hotelmenu hm=new hotelmenu();
             hm.setVisible(true);
+           
+        }
+            else{
+                JOptionPane.showMessageDialog(this,"Incorrect Password or Username");
+            }
+        
         }
         else if(e.getSource()==signup){
             dispose();
