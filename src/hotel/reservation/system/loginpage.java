@@ -126,6 +126,7 @@ public class loginpage extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==Login){
             dispose();
+            JOptionPane.showMessageDialog(this, "Log in Successful");
             hotelmenu hm=new hotelmenu();
             hm.setVisible(true);
         }
