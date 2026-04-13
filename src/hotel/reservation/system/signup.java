@@ -14,15 +14,13 @@ import java.awt.*;
  * @author Naige
  */
 public class signup extends JFrame implements ActionListener {
-    private JTextField userinp,emailinp,numberinp;
-    private JLabel userlbl,passlbl,emaillbl,numberlbl,titlelbl,bdaylbl;
+   
+   
     private JButton submitbtn;    
     private JPasswordField passinp; 
     private JComboBox<String>monthBox,dayBox,yearBox;
     private JTextField userinp,emailinp,numberinp,ageinp;
-    private JLabel userlbl,passlbl,emaillbl,numberlbl,agelbl,titlelbl,subTitle,hint,footer;
-    private JButton submitbtn;    
-    private JPasswordField passinp;
+    private JLabel userlbl,passlbl,emaillbl,numberlbl,agelbl,titlelbl,subTitle,hint,footer, bdaylbl;
     private ImageIcon originalIcon;
     signup(){
         setSize(400,550);
