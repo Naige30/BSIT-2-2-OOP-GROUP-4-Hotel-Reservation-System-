@@ -20,7 +20,7 @@ public class hotelmenu extends JFrame implements ActionListener {
     
     
     hotelmenu(){
-        setSize(600,600);
+        setSize(1000,1000);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(null);
         setLocationRelativeTo(null);
@@ -70,6 +70,10 @@ public class hotelmenu extends JFrame implements ActionListener {
            dispose();
            loginpage lp=new loginpage();
            lp.setVisible(true);
+       } else if(e.getSource() == reservebtn) {
+           dispose();
+           reservepage rp = new reservepage();
+           rp.setVisible(true);
        }
        else if(e.getSource()==viewbtn){
            dispose();

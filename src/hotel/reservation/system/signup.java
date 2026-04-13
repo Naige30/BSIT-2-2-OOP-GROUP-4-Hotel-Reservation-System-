@@ -29,6 +29,7 @@ public class signup extends JFrame implements ActionListener {
         getContentPane().setBackground(Color.WHITE);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+        setResizable(false);
 
         setIconImage(new ImageIcon(getClass().getResource("logo.png")).getImage());
         

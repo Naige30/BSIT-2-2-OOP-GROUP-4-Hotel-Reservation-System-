@@ -34,6 +34,7 @@ public class loginpage extends JFrame implements ActionListener {
         setLocationRelativeTo(null);
         
         
+        
         setIconImage(new ImageIcon(getClass().getResource("logo.png")).getImage());
         originalIcon = new ImageIcon(getClass().getResource("hotel.jpg"));
         Image img = originalIcon.getImage();
