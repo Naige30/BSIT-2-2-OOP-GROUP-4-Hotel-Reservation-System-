@@ -67,6 +67,10 @@ public class hotelmenu extends JFrame implements ActionListener {
            dispose();
            loginpage lp=new loginpage();
            lp.setVisible(true);
+       } else if(e.getSource() == reservebtn) {
+           dispose();
+           reservepage rp = new reservepage();
+           rp.setVisible(true);
        }
     }
     

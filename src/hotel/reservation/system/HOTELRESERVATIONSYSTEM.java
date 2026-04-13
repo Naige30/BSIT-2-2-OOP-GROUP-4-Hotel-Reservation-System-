@@ -20,5 +20,4 @@ public class HOTELRESERVATIONSYSTEM {
     // hotelmenu hm=new hotelmenu();
      //hm.setVisible(true);
     } 
-    
 } 
