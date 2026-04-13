@@ -36,6 +36,7 @@ public class hotelmenu extends JFrame implements ActionListener {
         viewbtn=new JButton("View");
         viewbtn.setBounds(35,150,100,30);
         add(viewbtn);
+        viewbtn.addActionListener(this);
         
         cancelbtn=new JButton("Cancel");
         cancelbtn.setBounds(35,200,100,30);
@@ -67,6 +68,11 @@ public class hotelmenu extends JFrame implements ActionListener {
            dispose();
            loginpage lp=new loginpage();
            lp.setVisible(true);
+       }
+       else if(e.getSource()==viewbtn){
+           dispose();
+           viewpage vp=new viewpage();
+           vp.setVisible(true);
        }
     }
     
