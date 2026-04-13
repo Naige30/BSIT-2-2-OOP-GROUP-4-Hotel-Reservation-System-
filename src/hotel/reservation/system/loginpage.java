@@ -7,6 +7,7 @@ package hotel.reservation.system;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.border.LineBorder;
 import javax.swing.*;
 
 /**
@@ -41,13 +42,13 @@ public class loginpage extends JFrame implements ActionListener {
         header = new JLabel("Welcome to Giovanni",SwingConstants.LEFT);
         header.setFont(new Font("SansSerif",Font.BOLD, 28));
         header.setBounds(430, 40, 350, 40);
-        header.setForeground(new Color(28, 28, 28));
+        header.setForeground(Color.BLACK);
         add(header);
         
         header2 = new JLabel("Madrigal Grand Hotel", SwingConstants.LEFT);
         header2.setFont(new Font("SansSerif", Font.BOLD, 28));
         header2.setBounds(430, 75, 350, 40);
-        header2.setForeground(new Color(28, 28, 28));
+        header2.setForeground(Color.BLACK);
         add(header2);
         
         
@@ -77,10 +78,12 @@ public class loginpage extends JFrame implements ActionListener {
         add(username);
         
         user=new JTextField();
+        user.setBorder(new LineBorder(new Color(225, 225, 225), 1));
         user.setBounds(430, 205, 300, 40);
         add(user);
         
         pass=new JPasswordField();
+        pass.setBorder(new LineBorder(new Color(225, 225, 225), 1));
         pass.setBounds(430, 285, 300, 40);
         add(pass);
         
