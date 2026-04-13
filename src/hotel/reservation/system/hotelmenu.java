@@ -45,7 +45,7 @@ public class hotelmenu extends JFrame implements ActionListener {
         searchbtn.setBounds(35,250,100,30);
         add(searchbtn);
         
-        hotels=new JTextArea("HERE ARE SOME DEALS!!\n"+" HOTEL 1: BLAH BLAH\n"+"TANGINA NI TUAZON");
+        hotels=new JTextArea("HERE ARE SOME DEALS!!\n"+" HOTEL 1: BLAH BLAH\n"+"TANGINA NI Gian");
         hotels.setBounds(200,100,350,350);
         hotels.setEditable(false);
         add(hotels);
@@ -56,18 +56,10 @@ public class hotelmenu extends JFrame implements ActionListener {
         logoutbtn.addActionListener(this);
         
         
+        reservebtn.addActionListener(this);
         
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
