@@ -15,7 +15,7 @@ import javax.swing.*;
  */
 public class viewpage extends JFrame implements ActionListener {
 private JLabel title,room1,room2,room3,room4;
-private JButton view1,view2,view3,view4,but1,but2,but3,but4;
+private JButton view1,view2,view3,view4,but1,but2,but3,but4,home;
 private JTextArea deet1,deet2,deet3,deet4;
     
     
@@ -62,6 +62,7 @@ private JTextArea deet1,deet2,deet3,deet4;
     view2=new JButton("VIEW MORE");
     view2.setBounds(600,320,120,35);
     add(view2);
+    view2.addActionListener(this);
     
     but2=new JButton("BOOK");
     but2.setBounds(740,320,120,35);
@@ -81,6 +82,7 @@ private JTextArea deet1,deet2,deet3,deet4;
     view3=new JButton("VIEW MORE");
     view3.setBounds(100,750,120,35);
     add(view3);
+    view3.addActionListener(this);
     
     but3=new JButton("BOOK");
     but3.setBounds(240,750,120,35);
@@ -100,11 +102,16 @@ private JTextArea deet1,deet2,deet3,deet4;
     view4=new JButton("VIEW MORE");
     view4.setBounds(600,750,120,35);
     add(view4);
+    view4.addActionListener(this);
     
     but4=new JButton("BOOK");
     but4.setBounds(740,750,120,35);
     add(but4);
     
+    home=new JButton("Home");
+    home.setBounds(30,30,90,70);
+    add(home);
+    home.addActionListener(this);
     
     
     
@@ -120,6 +127,26 @@ private JTextArea deet1,deet2,deet3,deet4;
             dispose();
             tuazondeluxe td=new tuazondeluxe();
             td.setVisible(true);
+        }
+        else if(e.getSource()==view2){
+            dispose();
+            grandeaviles ga=new grandeaviles();
+            ga.setVisible(true);
+        }
+        else if(e.getSource()==view3){
+            dispose();
+            casalacao cl=new casalacao();
+            cl.setVisible(true);
+        }
+        else if(e.getSource()==view4){
+            dispose();
+            palazzoarzola pa=new palazzoarzola();
+            pa.setVisible(true);
+        }
+        else if(e.getSource()==home){
+            dispose();
+            hotelmenu hm=new hotelmenu();
+            hm.setVisible(true);
         }
         
         
