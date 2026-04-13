@@ -25,6 +25,8 @@ public class hotelmenu extends JFrame implements ActionListener {
         setLayout(null);
         setLocationRelativeTo(null);
         
+        setIconImage(new ImageIcon(getClass().getResource("logo.png")).getImage());
+        
         welcometxt=new JLabel ("Welcome to Hotel App",SwingConstants.CENTER);
         welcometxt.setBounds(0,50,600,30);
         add(welcometxt);

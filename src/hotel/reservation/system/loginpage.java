@@ -71,9 +71,9 @@ public class loginpage extends JFrame implements ActionListener {
         line.setForeground(new Color(230, 230, 230));
         add(line);
         
-        username=new JLabel("USERNAME:");
+        username=new JLabel("Username");
         username.setFont(new Font("SansSerif", Font.BOLD, 11));
-        username.setForeground(new Color(150, 150, 150));
+        
         username.setBounds(430, 180, 200, 20);
         add(username);
         
@@ -87,9 +87,9 @@ public class loginpage extends JFrame implements ActionListener {
         pass.setBounds(430, 285, 300, 40);
         add(pass);
         
-        password=new JLabel("PASSWORD:");
+        password=new JLabel("Password");
         password.setFont(new Font("SansSerif", Font.BOLD, 11));
-        password.setForeground(new Color(150, 150, 150));
+        
         password.setBounds(430, 265, 200, 20);
         add(password);
         
