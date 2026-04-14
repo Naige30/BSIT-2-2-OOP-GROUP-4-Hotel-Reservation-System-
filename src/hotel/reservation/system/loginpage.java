@@ -17,7 +17,7 @@ import javax.swing.*;
 public class loginpage extends JFrame implements ActionListener {
     private JTextField user;
     private JButton Login,signup;
-    private JLabel header,header2,subheader,username,password,sideImage,option1;
+    private JLabel header,header2,subheader,username,password,sideImage,option1,address;
     private JPasswordField pass;
     private JSeparator line;
     private ImageIcon originalIcon;
@@ -26,7 +26,7 @@ public class loginpage extends JFrame implements ActionListener {
     loginpage(){
         
        
-        setSize(800,600);
+        setSize(820,600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(null);
         getContentPane().setBackground(Color.WHITE);
@@ -40,15 +40,15 @@ public class loginpage extends JFrame implements ActionListener {
         Image img = originalIcon.getImage();
         
 
-        header = new JLabel("Welcome to Giovanni",SwingConstants.LEFT);
-        header.setFont(new Font("SansSerif",Font.BOLD, 28));
-        header.setBounds(430, 40, 350, 40);
+        header = new JLabel("Welcome to ",SwingConstants.CENTER);
+        header.setFont(new Font("Serif", Font.BOLD, 28));
+        header.setBounds(410, 40, 350, 40);
         header.setForeground(Color.BLACK);
         add(header);
         
-        header2 = new JLabel("Madrigal Grand Hotel", SwingConstants.LEFT);
-        header2.setFont(new Font("SansSerif", Font.BOLD, 28));
-        header2.setBounds(430, 75, 350, 40);
+        header2 = new JLabel("Giovanni Madrigal Grand Hotel", SwingConstants.LEFT);
+        header2.setFont(new Font("Serif", Font.BOLD | Font.ITALIC, 28));
+        header2.setBounds(400, 75, 400, 40);
         header2.setForeground(Color.BLACK);
         add(header2);
         
@@ -119,6 +119,12 @@ public class loginpage extends JFrame implements ActionListener {
         add(signup);
         signup.addActionListener(this);
         
+        address = new JLabel("SAN PEDRO ROAD, BIÑAN CITY, MANILA, PHILIPPINES");
+        address.setFont(new Font("SansSerif", Font.PLAIN, 10)); 
+        address.setForeground(new Color(150, 150, 150)); 
+        address.setHorizontalAlignment(SwingConstants.CENTER);
+        address.setBounds(430, 500, 300, 20);
+        add(address);
         
         
     }
