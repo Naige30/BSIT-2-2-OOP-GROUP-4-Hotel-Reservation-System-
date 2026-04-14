@@ -22,6 +22,7 @@ public class tuazondeluxe extends JFrame implements ActionListener {
         setSize(1000,1000);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(null);
+        setLocationRelativeTo(null);
         
         title=new JLabel("Giovanni Madrigal Grand Hotel",SwingConstants.CENTER);
         title.setBounds(0,20,1000,40);

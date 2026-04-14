@@ -58,7 +58,7 @@ public class hotelmenu extends JFrame implements ActionListener {
     styleMenuButton(logoutbtn = new JButton("LOG OUT"), 780);
     logoutbtn.addActionListener(this);
 
-    hotels = new JTextArea("Located along San Pedro Road in Biñan City, Manila, Giovanni Madrigal Grand Hotel introduces a new expression of luxury in the South. It is a refined sanctuary "
+    hotels = new JTextArea("Located along San Pedro Road in Biñan, Manila, Giovanni Madrigal Grand Hotel introduces a new expression of luxury in the South. It is a refined sanctuary "
             + "where the romance of Italian culture is seamlessly woven with the warmth and grace of Filipino heritage. Designed as both a destination and an experience, "
             + "the hotel offers an atmosphere of quiet sophistication just moments away from the energy of the city.\n"
             + "\n"
