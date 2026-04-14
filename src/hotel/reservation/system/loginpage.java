@@ -119,7 +119,7 @@ public class loginpage extends JFrame implements ActionListener {
         add(signup);
         signup.addActionListener(this);
         
-        address = new JLabel("SAN PEDRO ROAD, BIÑAN CITY, MANILA, PHILIPPINES");
+        address = new JLabel("SAN PEDRO ROAD, BIÑAN, MANILA, PHILIPPINES");
         address.setFont(new Font("SansSerif", Font.PLAIN, 10)); 
         address.setForeground(new Color(150, 150, 150)); 
         address.setHorizontalAlignment(SwingConstants.CENTER);
