@@ -14,7 +14,7 @@ import javax.swing.*;
  */
 public class SummaryPage extends JFrame implements ActionListener {
 
-    JButton back;
+    JButton back, cancel;
     
     SummaryPage(
         String fname, String lname,
@@ -45,7 +45,7 @@ public class SummaryPage extends JFrame implements ActionListener {
         addLabel("Check-in Date: " + indate, y); y += 30;
         addLabel("Check-in Time: " + intime, y); y += 30;
         addLabel("Check-out Date: " + outdate + " " + outtime, y); y += 30;
-        addLabel("Check-out Time: " + intime, y); y += 30;
+        addLabel("Check-out Time: " + outtime, y); y += 30;
 
         addLabel("Room Type: " + roomPref, y); y += 30;
 
