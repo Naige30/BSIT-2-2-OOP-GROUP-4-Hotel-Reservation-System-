@@ -21,18 +21,19 @@ public class loginpage extends JFrame implements ActionListener {
     private JPasswordField pass;
     private JSeparator line;
     private ImageIcon originalIcon;
+
     
     
     loginpage(){
         
        
         setSize(820,600);
+        setTitle("Giovanni Madrigal Grand Hotel: A Hotel Reservation System");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(null);
         getContentPane().setBackground(Color.WHITE);
         setResizable(false);
         setLocationRelativeTo(null);
-        
         
         
         setIconImage(new ImageIcon(getClass().getResource("logo.png")).getImage());
@@ -97,8 +98,8 @@ public class loginpage extends JFrame implements ActionListener {
         Login=new JButton("Login");
         Login.setFont(new Font("SansSerif", Font.BOLD, 14));
         Login.setBounds(430, 360, 300, 45);
-        Login.setBackground(new Color(27,60,83));
-        Login.setForeground(Color.white);
+        Login.setBackground(new Color(200, 170, 120));
+        Login.setForeground(Color.WHITE);
         Login.setFocusPainted(false);
         add(Login);
         Login.addActionListener(this);
@@ -119,7 +120,13 @@ public class loginpage extends JFrame implements ActionListener {
         add(signup);
         signup.addActionListener(this);
         
+        ImageIcon pinIconRaw = new ImageIcon(getClass().getResource("pin.png"));
+        Image pinScaled = pinIconRaw.getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH);
+        ImageIcon pinIcon = new ImageIcon(pinScaled);
+        
         address = new JLabel("SAN PEDRO ROAD, BIÑAN, MANILA, PHILIPPINES");
+        address.setIcon(pinIcon);
+        address.setIconTextGap(5);
         address.setFont(new Font("SansSerif", Font.PLAIN, 10)); 
         address.setForeground(new Color(150, 150, 150)); 
         address.setHorizontalAlignment(SwingConstants.CENTER);
@@ -132,7 +139,7 @@ public class loginpage extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==Login){
-            if(user.getText().equals("admin")&&pass.getText().equals("admin123")){;
+            if(user.getText().equals("")&&pass.getText().equals("")){;
             dispose();
             JOptionPane.showMessageDialog(this, "Log in Successful");
             hotelmenu hm=new hotelmenu();

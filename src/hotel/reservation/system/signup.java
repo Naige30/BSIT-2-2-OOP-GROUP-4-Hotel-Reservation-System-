@@ -25,6 +25,7 @@ public class signup extends JFrame implements ActionListener {
     private JSeparator separator;
     signup(){
         setSize(400,650);
+        setTitle("Giovanni Madrigal Grand Hotel: Create an Account");
         setLayout(null);
         getContentPane().setBackground(Color.WHITE);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
