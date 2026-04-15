@@ -22,6 +22,7 @@ public class hotelmenu extends JFrame implements ActionListener {
     
     hotelmenu(){
         setSize(1000,880);
+        setTitle("Giovanni Madrigal Grand Hotel: A Hotel Reservation System");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         getContentPane().setBackground(Color.WHITE);
         setLayout(null);
