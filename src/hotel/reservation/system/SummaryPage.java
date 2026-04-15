@@ -55,10 +55,17 @@ public class SummaryPage extends JFrame implements ActionListener {
         addLabel(notes, y); y += 20;
 
         back = new JButton("Back");
-        back.setBounds(190, y, 90, 30);
+        back.setBounds(120, y, 100, 30);
         add(back);
 
+        cancel = new JButton("Cancel Reservation");
+        cancel.setBounds(240, y, 170, 30);
+        add(cancel);
+        
+
         back.addActionListener(this);
+        cancel.addActionListener(this);
+        
 
         setVisible(true);
     }
@@ -72,7 +79,12 @@ public class SummaryPage extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if (e.getSource() == back) {
+     if (e.getSource() == back) {
+            this.dispose();
+            new hotelmenu().setVisible(true);
+        }
+        else if (e.getSource() == cancel) {
+            JOptionPane.showMessageDialog(this, "Reservation Cancelled!");
             this.dispose();
             new hotelmenu().setVisible(true);
         }
