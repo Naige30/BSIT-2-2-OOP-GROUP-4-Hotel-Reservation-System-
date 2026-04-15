@@ -17,8 +17,6 @@ public class HOTELRESERVATIONSYSTEM {
      loginpage lp=new loginpage();
      lp.setVisible(true);
      
-    // hotelmenu hm=new hotelmenu();
-     //hm.setVisible(true);
-    }
-    
-}
+   
+    } 
+} 
