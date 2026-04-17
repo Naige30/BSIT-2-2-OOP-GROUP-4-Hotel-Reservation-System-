@@ -20,7 +20,7 @@ private JButton view1,view2,view3,view4,but1,but2,but3,but4,home;
 private JTextArea deet1,deet2,deet3,deet4;
 private JPanel miniLine,miniSep;
 private JTextArea details;
-private JButton viewBtn,bookBtn;
+private JButton viewBtn,bookBtn,book1, book2, book3, book4;
     
     
     viewpage(){
@@ -186,6 +186,19 @@ private JButton viewBtn,bookBtn;
             view4 = viewBtn;
             view4.addActionListener(this);
         }
+           if (title.equals("Tuazon Deluxe")) {
+            book1 = bookBtn;
+            book1.addActionListener(this);
+        } else if (title.equals("Grande' Aviles")) {
+            book2 = bookBtn;
+            book2.addActionListener(this);
+        } else if (title.equals("Casa Lacao")) {
+            book3 = bookBtn;
+            book3.addActionListener(this);
+        } else if (title.equals("Palazzo Arzola")) {
+            book4 = bookBtn;
+            book4.addActionListener(this);
+}
 
         return panel;
     }
@@ -233,8 +246,32 @@ private JButton viewBtn,bookBtn;
             hotelmenu hm=new hotelmenu();
             hm.setVisible(true);
         }
+        else if(e.getSource()==book1){
+            dispose();
+            reservepage rp = new reservepage();
+            rp.setVisible(true);
+        }
+        else if(e.getSource()==book2){
+            dispose();
+            reservepage rp = new reservepage();
+            rp.setVisible(true);
+        }
+        else if(e.getSource()==book3){
+            dispose();
+            reservepage rp = new reservepage();
+            rp.setVisible(true);
+        }
+        else if(e.getSource()==book4){
+            dispose();
+            reservepage rp = new reservepage();
+            rp.setVisible(true);
+        }
+        
+        
         
         
     }
+    
+    
     
 }
