@@ -75,8 +75,8 @@ public class reservepage extends JFrame implements ActionListener {
         ImageIcon userIcon = new ImageIcon(userScaled);
 
         fname = new JLabel("FIRST NAME");
-        fname.setIcon(userIcon); // Set the icon
-        fname.setIconTextGap(8); // Add a small gap between the icon and text
+        fname.setIcon(userIcon); 
+        fname.setIconTextGap(8); 
         fname.setFont(new Font("SansSerif", Font.BOLD, 10));
         fname.setForeground(Color.BLACK);
         fname.setBounds(100, 360, 100, 20);
