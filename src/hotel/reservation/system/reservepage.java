@@ -5,10 +5,10 @@
 package hotel.reservation.system;
 
 import java.awt.*;
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 
 
@@ -17,7 +17,7 @@ import javax.swing.border.MatteBorder;
  * @author User
  */
 public class reservepage extends JFrame implements ActionListener {
-    private JButton submit;
+    private JButton submit,cancel;
     JLabel fname, lname, add1, add2, city, state, zip, phone, email, 
             intime, indate, outtime, outdate, pref, adult, child, x,contactPhone,contactEmail;
     JTextField fld1, fld2,fld3, fld4, fld5, fld6, fld7, fld8, fld9, fld10, fld11, fld12, fld13, fld14, fld15;
@@ -182,7 +182,9 @@ public class reservepage extends JFrame implements ActionListener {
         fld8.setBounds(100, 615, 385, 25);
         add(fld8);
         
-        ImageIcon emailIcon = new ImageIcon(new ImageIcon(getClass().getResource("email.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH));
+        ImageIcon emailIconRaw = new ImageIcon(getClass().getResource("email.png"));
+        Image emailScaled = emailIconRaw.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+        ImageIcon emailIcon = new ImageIcon(emailScaled);
         email = new JLabel("E-MAIL ADDRESS");
         email.setIcon(emailIcon);
         email.setIconTextGap(5);
@@ -195,7 +197,9 @@ public class reservepage extends JFrame implements ActionListener {
         fld9.setBounds(515, 615, 385, 25);
         add(fld9);
         
-        ImageIcon checkInIcon = new ImageIcon(new ImageIcon(getClass().getResource("date.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH));
+        ImageIcon checkInIconRaw = new ImageIcon(getClass().getResource("date.png"));
+        Image checkInScaled = checkInIconRaw.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+        ImageIcon checkInIcon = new ImageIcon(checkInScaled);
         indate = new JLabel("CHECK-IN (DATE / TIME)");
         indate.setIcon(checkInIcon);
         indate.setIconTextGap(5);
@@ -211,8 +215,10 @@ public class reservepage extends JFrame implements ActionListener {
         fld11 = new JTextField(); //eto yung time 
         fld11.setBounds(300, 685, 185, 25);
         add(fld11);
-        ImageIcon checkOutIcon = new ImageIcon(new ImageIcon(getClass().getResource("date2.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH));
         
+        ImageIcon checkOutIconRaw = new ImageIcon(getClass().getResource("date2.png"));
+        Image checkOutScaled = checkOutIconRaw.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+        ImageIcon checkOutIcon = new ImageIcon(checkOutScaled);
         outdate = new JLabel("CHECK-OUT (DATE / TIME)");
         outdate.setIcon(checkOutIcon);
         outdate.setIconTextGap(5);
@@ -229,7 +235,9 @@ public class reservepage extends JFrame implements ActionListener {
         fld13.setBounds(715, 685, 185, 25);
         add(fld13);
         
-        ImageIcon roomPrefIcon = new ImageIcon(new ImageIcon(getClass().getResource("roompref.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH));
+        ImageIcon roomPrefIconRaw = new ImageIcon(getClass().getResource("roompref.png"));
+        Image roomPrefScaled = roomPrefIconRaw.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+        ImageIcon roomPrefIcon = new ImageIcon(roomPrefScaled);
         pref = new JLabel("ROOM PREFERENCE");
         pref.setIcon(roomPrefIcon);
         pref.setIconTextGap(5);
@@ -238,17 +246,17 @@ public class reservepage extends JFrame implements ActionListener {
         pref.setBounds(100, 730, 200, 20);
         add(pref);
         
-        standard = new JRadioButton("STANDARD");
+        standard = new JRadioButton("Tuazon Deluxe");
         standard.setBackground(Color.WHITE);
         standard.setBounds(100, 755, 90, 25);
         add(standard);
         
-        deluxe = new JRadioButton("DELUXE");
+        deluxe = new JRadioButton("Grande Aviles");
         deluxe.setBackground(Color.WHITE);
         deluxe.setBounds(190, 755, 90, 25);
         add(deluxe);
         
-        suite = new JRadioButton("SUITE");
+        suite = new JRadioButton("Casa Lacao");
         suite.setBackground(Color.WHITE);
         suite.setBounds(280, 755, 90, 25);
         add(suite);
@@ -256,7 +264,9 @@ public class reservepage extends JFrame implements ActionListener {
         ButtonGroup group = new ButtonGroup();
         group.add(standard); group.add(deluxe); group.add(suite);
         
-        ImageIcon adultsIcon = new ImageIcon(new ImageIcon(getClass().getResource("adults.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH));
+        ImageIcon adultsIconRaw = new ImageIcon(getClass().getResource("adults.png"));
+        Image adultsScaled = adultsIconRaw.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+        ImageIcon adultsIcon = new ImageIcon(adultsScaled);
         adult = new JLabel("NUMBER OF ADULTS");
         adult.setIcon(adultsIcon);
         adult.setIconTextGap(5);
@@ -269,7 +279,9 @@ public class reservepage extends JFrame implements ActionListener {
         fld14.setBounds(515, 755, 185, 25);
         add(fld14);
         
-        ImageIcon childrenIcon = new ImageIcon(new ImageIcon(getClass().getResource("childrens.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH));
+        ImageIcon childrenIconRaw = new ImageIcon(getClass().getResource("childrens.png"));
+        Image childrenScaled = childrenIconRaw.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+        ImageIcon childrenIcon = new ImageIcon(childrenScaled);
         child = new JLabel("NUMBER OF CHILDREN");
         child.setIcon(childrenIcon);
         child.setIconTextGap(5);
@@ -279,11 +291,12 @@ public class reservepage extends JFrame implements ActionListener {
         add(child);
 
         fld15 = new JTextField();
-        
         fld15.setBounds(715, 755, 185, 25);
         add(fld15);
         
-ImageIcon instructionsIcon = new ImageIcon(new ImageIcon(getClass().getResource("instructions.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH));
+        ImageIcon instructionsIconRaw = new ImageIcon(getClass().getResource("instructions.png"));
+        Image instructionsScaled = instructionsIconRaw.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+        ImageIcon instructionsIcon = new ImageIcon(instructionsScaled);
         x = new JLabel("SPECIAL INSTRUCTIONS");
         x.setIcon(instructionsIcon);
         x.setIconTextGap(5);
@@ -300,20 +313,35 @@ ImageIcon instructionsIcon = new ImageIcon(new ImageIcon(getClass().getResource(
         add(y);
       
         
-        submit = new JButton("CONFIRM RESERVATION");
+        submit = new JButton("Confirm Reservation");
         submit.setFont(new Font("SansSerif", Font.BOLD, 12));
         submit.setBackground(new Color(27, 60, 83));
         submit.setForeground(Color.WHITE);
         submit.setFocusPainted(false);
         submit.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        submit.setBounds(350, 885, 300, 45);
+        submit.setBounds(510, 885, 250, 45);
         add(submit);
+        
+        cancel = new JButton("Cancel Reservation");
+        cancel.setBackground(new Color(245, 245, 245));
+        cancel.setForeground(Color.DARK_GRAY);
+        cancel.setBorder(new LineBorder(new Color(225, 225, 225), 1));
+        cancel.setFocusPainted(false);
+        cancel.setBounds(240, 885, 250, 45);
+        add(cancel);
+        
         submit.addActionListener(this);
+        cancel.addActionListener(this);
     }
         
     @Override
     public void actionPerformed(ActionEvent e) {
         
+        if (e.getSource() == cancel) {
+        this.dispose();
+        new hotelmenu().setVisible(true);
+        return; 
+    }
         
     if (e.getSource() == submit) {
 
@@ -341,10 +369,11 @@ ImageIcon instructionsIcon = new ImageIcon(new ImageIcon(getClass().getResource(
         else if (suite.isSelected()) roomPref = "Suite";
 
         
-        if (firstname.isEmpty() || lastname.isEmpty()) {
+        if (firstname.isEmpty() || lastname.isEmpty() || address1.isEmpty() || phonenum.isEmpty() || emailval.isEmpty() || inDate.isEmpty() || inTime.isEmpty() || outDate.isEmpty() || outTime.isEmpty() ) {
             JOptionPane.showMessageDialog(this, "Please complete required fields.");
             return;
         }
+        
 
         JOptionPane.showMessageDialog(this, "Reservation Added!");
 
