@@ -169,7 +169,7 @@ private JButton viewBtn,bookBtn,book1, book2, book3, book4;
        
         bookBtn = new JButton("BOOK");
         bookBtn.setBounds(290, 190, 80, 30);
-        styleGoldButton(bookBtn);
+        styleButton1(bookBtn);
         panel.add(bookBtn);
 
 
@@ -211,7 +211,7 @@ private JButton viewBtn,bookBtn,book1, book2, book3, book4;
         btn.setBorder(new LineBorder(new Color(180, 180, 180)));
     }
 
-    private void styleGoldButton(JButton btn) {
+    private void styleButton1(JButton btn) {
         btn.setFocusPainted(false);
         btn.setBackground(new Color(200, 170, 120));
         btn.setForeground(Color.WHITE);
