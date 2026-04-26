@@ -126,7 +126,7 @@ public class SummaryPage extends JFrame implements ActionListener {
 
      if (e.getSource() == done) {
             this.dispose();
-            new hotelmenu().setVisible(true);
+            new payment().setVisible(true);
         }
         else if (e.getSource() == cancel) {
             int response = JOptionPane.showConfirmDialog(this, 
