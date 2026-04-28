@@ -96,7 +96,7 @@ public class SummaryPage extends JFrame implements ActionListener {
         cancel.setBounds(175, y, 160, 40);
         add(cancel);
         
-        done = new JButton("Done");
+        done = new JButton("Payment");
         done.setBounds(365, y, 200, 40);
         done.setBackground(new Color(69, 104, 130));
         done.setForeground(Color.WHITE);

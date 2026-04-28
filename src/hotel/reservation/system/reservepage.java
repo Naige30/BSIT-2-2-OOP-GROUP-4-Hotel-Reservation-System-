@@ -21,7 +21,7 @@ public class reservepage extends JFrame implements ActionListener {
     JLabel fname, lname, add1, add2, city, state, zip, phone, email, 
             intime, indate, outtime, outdate, pref, adult, child, x,contactPhone,contactEmail;
     JTextField fld1, fld2,fld3, fld4, fld5, fld6, fld7, fld8, fld9, fld10, fld11, fld12, fld13, fld14, fld15;
-    JRadioButton standard, deluxe, suite;
+    JRadioButton standard, deluxe, suite, luh;
     JTextArea y;
     JPanel leftLine,rightLine;
     private JLabel headline,welcometxt;
@@ -248,21 +248,26 @@ public class reservepage extends JFrame implements ActionListener {
         
         standard = new JRadioButton("Tuazon Deluxe");
         standard.setBackground(Color.WHITE);
-        standard.setBounds(100, 755, 90, 25);
+        standard.setBounds(100, 755, 180, 25);
         add(standard);
         
         deluxe = new JRadioButton("Grande Aviles");
         deluxe.setBackground(Color.WHITE);
-        deluxe.setBounds(190, 755, 90, 25);
+        deluxe.setBounds(100, 775, 180, 25);
         add(deluxe);
         
         suite = new JRadioButton("Casa Lacao");
         suite.setBackground(Color.WHITE);
-        suite.setBounds(280, 755, 90, 25);
+        suite.setBounds(300, 755, 180, 25);
         add(suite);
         
+        luh=new JRadioButton("Palazzo Arzola");
+        luh.setBackground(Color.WHITE);
+        luh.setBounds(300,775,180,25);
+        add(luh);
+        
         ButtonGroup group = new ButtonGroup();
-        group.add(standard); group.add(deluxe); group.add(suite);
+        group.add(standard); group.add(deluxe); group.add(suite);group.add(luh);
         
         ImageIcon adultsIconRaw = new ImageIcon(getClass().getResource("adults.png"));
         Image adultsScaled = adultsIconRaw.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
@@ -364,9 +369,10 @@ public class reservepage extends JFrame implements ActionListener {
         String children = fld15.getText();
         String notes = y.getText();
 
-        if (standard.isSelected()) roomPref = "Standard";
-        else if (deluxe.isSelected()) roomPref = "Deluxe";
-        else if (suite.isSelected()) roomPref = "Suite";
+        if (standard.isSelected()) roomPref = "Tuazon Deluxe";
+        else if (deluxe.isSelected()) roomPref = "Grande Aviles";
+        else if (suite.isSelected()) roomPref = "Casa Lacao";
+        else if (luh.isSelected()) roomPref = "Palazzo Arzola";
 
         
         if (firstname.isEmpty() || lastname.isEmpty() || address1.isEmpty() || phonenum.isEmpty() || emailval.isEmpty() || inDate.isEmpty() || inTime.isEmpty() || outDate.isEmpty() || outTime.isEmpty() ) {
