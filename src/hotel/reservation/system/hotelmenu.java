@@ -140,6 +140,11 @@ public class hotelmenu extends JFrame implements ActionListener {
            viewpage vp=new viewpage();
            vp.setVisible(true);
        }
+       else if(e.getSource()==searchbtn){
+           dispose();
+           searchpage sp =new searchpage();
+           sp.setVisible(true);
+       }
     }
     
     
