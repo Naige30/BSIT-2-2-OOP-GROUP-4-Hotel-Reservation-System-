@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package hotel.reservation.system;
 
 import java.awt.*;
@@ -10,10 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 
-/**
- *
- * @author Naige
- */
+
 public class viewpage extends JFrame implements ActionListener {
 private JLabel title,room1,room2,room3,room4,hotelName,subtitle,img,roomTitle;
 private JButton view1,view2,view3,view4,but1,but2,but3,but4,home;

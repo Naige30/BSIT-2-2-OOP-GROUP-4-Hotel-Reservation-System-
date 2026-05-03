@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package hotel.reservation.system;
 
 import java.awt.*;
@@ -10,10 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.border.LineBorder;
 import javax.swing.*;
 
-/**
- *
- * @author Naige
- */
+
 public class loginpage extends JFrame implements ActionListener {
     private JTextField user;
     private JButton Login,signup;

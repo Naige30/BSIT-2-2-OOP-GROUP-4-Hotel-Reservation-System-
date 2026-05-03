@@ -6,10 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import javax.swing.border.LineBorder;
 
-/**
- *
- * @author User
- */
+
 public class SummaryPage extends JFrame implements ActionListener {
     
     JLabel welcome,titlelbl,reqLbl;

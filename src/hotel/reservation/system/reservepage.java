@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package hotel.reservation.system;
 
 import java.awt.*;
@@ -12,10 +9,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 
 
-/**
- *
- * @author User
- */
+
 public class reservepage extends JFrame implements ActionListener {
     private JButton submit,cancel;
     JLabel fname, lname, add1, add2, city, state, zip, phone, email, 
