@@ -1,190 +1,192 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package hotel.reservation.system;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import javax.swing.*;
 
-/**
- *
- * @author Naige
- */
 public class payment extends JFrame implements ActionListener {
-   private JLabel title;
-    private JLabel cardNumberlbl, fnamelbl, lnamelbl, expirymonthlbl, yearexpirylbl, cvclbl;
-    private JLabel addresslbl, citylbl, postalLbl, countryLbl;
 
-    private JTextField cardNumberText, fnameText, lnameText, cvcText;
-    private JTextField addressText, cityText, postalText;
+    private JTextField nameField, cardField, cvcField, emailField;
+    private JComboBox<String> monthBox, yearBox;
 
-    private JComboBox<String> monthBox, yearBox, countryBox;
+    private JButton continueButton, cancelButton;
 
-    private JButton payButton,backButton;
+    private final Font TITLE_FONT = new Font("Segoe UI", Font.BOLD, 20);
+    private final Font LABEL_FONT = new Font("Segoe UI", Font.PLAIN, 13);
+    private final Font INPUT_FONT = new Font("Segoe UI", Font.PLAIN, 14);
+    private final Font BUTTON_FONT = new Font("Segoe UI", Font.BOLD, 14);
 
-    
-    
-    payment(){
-        setSize(1000, 1000);
+    public payment() {
+
+        setTitle("Payment");
+        setSize(400, 680);
         setLayout(null);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
+        setIconImage(new ImageIcon(getClass().getResource("logo.png")).getImage());
 
-        
-        getContentPane().setBackground(new Color(201, 162, 39));
+        getContentPane().setBackground(new Color(245, 245, 245));
 
-        
-        title = new JLabel("Payment Method");
-        title.setFont(new Font("Arial", Font.BOLD, 26));
-        title.setBounds(0, 20, 1000, 40);
+
+        JLabel title = new JLabel("Secure Payment");
+        title.setFont(TITLE_FONT);
+        title.setBounds(0, 20, 400, 30);
         title.setHorizontalAlignment(SwingConstants.CENTER);
         add(title);
 
-        
-        JPanel formPanel = new JPanel();
-        formPanel.setLayout(null);
-        formPanel.setBounds(300, 80, 400, 800);
-        formPanel.setBackground(Color.WHITE);
-        add(formPanel);
 
-  
-        cardNumberlbl = new JLabel("Credit/Debit Card Number");
-        cardNumberlbl.setBounds(50, 30, 250, 20);
-        formPanel.add(cardNumberlbl);
+        JPanel panel = new JPanel(null);
+        panel.setBounds(20, 60, 350, 570);
+        panel.setBackground(Color.WHITE);
+        panel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
+        add(panel);
 
-        cardNumberText = new JTextField();
-        cardNumberText.setBounds(50, 55, 300, 30);
-        formPanel.add(cardNumberText);
 
-      
-        fnamelbl = new JLabel("First Name");
-        fnamelbl.setBounds(50, 100, 100, 20);
-        formPanel.add(fnamelbl);
+        JPanel paymentBox = new JPanel(null);
+        paymentBox.setBounds(15, 15, 320, 60);
+        paymentBox.setBorder(BorderFactory.createDashedBorder(new Color(180, 180, 180)));
+        paymentBox.setBackground(Color.WHITE);
+        panel.add(paymentBox);
 
-        fnameText = new JTextField();
-        fnameText.setBounds(50, 125, 140, 30);
-        formPanel.add(fnameText);
+        JLabel pmLabel = new JLabel("Payment Method");
+        pmLabel.setFont(LABEL_FONT);
+        pmLabel.setBounds(10, 10, 150, 40);
+        paymentBox.add(pmLabel);
 
-       
-        lnamelbl = new JLabel("Last Name");
-        lnamelbl.setBounds(210, 100, 100, 20);
-        formPanel.add(lnamelbl);
+        paymentBox.add(createIcon("mastercard.png", 150));
+        paymentBox.add(createIcon("visa.png", 190));
+        paymentBox.add(createIcon("americanexpress.png", 230));
 
-        lnameText = new JTextField();
-        lnameText.setBounds(210, 125, 140, 30);
-        formPanel.add(lnameText);
 
-        
-        expirymonthlbl = new JLabel("Expiry Month");
-        expirymonthlbl.setBounds(50, 170, 120, 20);
-        formPanel.add(expirymonthlbl);
+        panel.add(createLabel("Card Owner", 15, 95));
+        nameField = createField("Name", 15, 120);
+        panel.add(nameField);
+
+
+        panel.add(createLabel("Card number", 15, 170));
+        cardField = createField("0000 0000 0000 0000", 15, 195);
+        panel.add(cardField);
+
+
+        panel.add(createLabel("Card Expiration", 15, 245));
 
         String[] months = {
-            "01","02","03","04","05","06",
-            "07","08","09","10","11","12"
+                "Month","01","02","03","04","05","06",
+                "07","08","09","10","11","12"
         };
+
         monthBox = new JComboBox<>(months);
-        monthBox.setBounds(50, 195, 140, 30);
-        formPanel.add(monthBox);
+        monthBox.setFont(INPUT_FONT);
+        monthBox.setBounds(15, 270, 150, 35);
+        monthBox.setBackground(Color.WHITE);
+        panel.add(monthBox);
 
-        
-        yearexpirylbl = new JLabel("Expiry Year");
-        yearexpirylbl.setBounds(210, 170, 120, 20);
-        formPanel.add(yearexpirylbl);
+        String[] years = {
+                "Year","2026","2027","2028","2029","2030","2031","2032","2033","2034","2035"
+        };
 
-        String[] years = {"2024","2025","2026","2027","2028","2029"};
         yearBox = new JComboBox<>(years);
-        yearBox.setBounds(210, 195, 140, 30);
-        formPanel.add(yearBox);
-
-       
-        cvclbl = new JLabel("CVC / CVV");
-        cvclbl.setBounds(50, 240, 100, 20);
-        formPanel.add(cvclbl);
-
-        cvcText = new JTextField();
-        cvcText.setBounds(50, 265, 140, 30);
-        formPanel.add(cvcText);
-
-        
-        JLabel billingTitle = new JLabel("Billing Information");
-        billingTitle.setFont(new Font("Arial", Font.BOLD, 16));
-        billingTitle.setBounds(50, 310, 200, 20);
-        formPanel.add(billingTitle);
-
-      
-        addresslbl = new JLabel("Address");
-        addresslbl.setBounds(50, 340, 100, 20);
-        formPanel.add(addresslbl);
-
-        addressText = new JTextField();
-        addressText.setBounds(50, 365, 300, 30);
-        formPanel.add(addressText);
+        yearBox.setFont(INPUT_FONT);
+        yearBox.setBounds(185, 270, 150, 35);
+        yearBox.setBackground(Color.WHITE);
+        panel.add(yearBox);
 
 
-        citylbl = new JLabel("City");
-        citylbl.setBounds(50, 410, 100, 20);
-        formPanel.add(citylbl);
+        panel.add(createLabel("Card Security Code", 15, 320));
+        cvcField = createField("CVV", 15, 345);
+        panel.add(cvcField);
 
-        cityText = new JTextField();
-        cityText.setBounds(50, 435, 300, 30);
-        formPanel.add(cityText);
 
-      
-        postalLbl = new JLabel("Postal Code");
-        postalLbl.setBounds(50, 480, 100, 20);
-        formPanel.add(postalLbl);
+        panel.add(createLabel("Email (for receipt)", 15, 395));
+        emailField = createField("example@email.com", 15, 420);
+        panel.add(emailField);
 
-        postalText = new JTextField();
-        postalText.setBounds(50, 505, 300, 30);
-        formPanel.add(postalText);
 
-       
-        countryLbl = new JLabel("Country");
-        countryLbl.setBounds(50, 550, 100, 20);
-        formPanel.add(countryLbl);
+        continueButton = new JButton("Continue");
+        continueButton.setBounds(15, 475, 320, 42);
+        continueButton.setBackground(new Color(69, 104, 130));
+        continueButton.setForeground(Color.WHITE);
+        continueButton.setFont(BUTTON_FONT);
+        continueButton.setFocusPainted(false);
+        continueButton.addActionListener(this);
+        panel.add(continueButton);
 
-        String[] countries = {"Philippines", "USA", "Japan", "UK"};
-        countryBox = new JComboBox<>(countries);
-        countryBox.setBounds(50, 575, 300, 30);
-        formPanel.add(countryBox);
 
-        
-        payButton = new JButton("Pay Now");
-        payButton.setBounds(50, 650, 300, 40);
-        payButton.addActionListener(this);
-        formPanel.add(payButton);
-        
-        backButton=new JButton("Back");
-        backButton.setBounds(50,720,300,40);
-        backButton.addActionListener(this);
-        formPanel.add(backButton);
+        cancelButton = new JButton("Cancel");
+        cancelButton.setBounds(15, 525, 320, 35);
+        cancelButton.setBackground(new Color(235, 235, 235));
+        cancelButton.setForeground(new Color(80, 80, 80));
+        cancelButton.setFont(BUTTON_FONT);
+        cancelButton.setFocusPainted(false);
+        cancelButton.addActionListener(this);
+        panel.add(cancelButton);
 
         setVisible(true);
-        
-        
-        
+    }
+
+
+    private JLabel createLabel(String text, int x, int y) {
+        JLabel lbl = new JLabel(text);
+        lbl.setFont(LABEL_FONT);
+        lbl.setBounds(x, y, 250, 20);
+        return lbl;
+    }
+
+
+    private JTextField createField(String placeholder, int x, int y) {
+        JTextField field = new JTextField(placeholder);
+        field.setBounds(x, y, 320, 35);
+        field.setFont(INPUT_FONT);
+        field.setForeground(Color.GRAY);
+        field.setBorder(BorderFactory.createLineBorder(new Color(210, 210, 210)));
+
+        field.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (field.getText().equals(placeholder)) {
+                    field.setText("");
+                    field.setForeground(Color.BLACK);
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (field.getText().isEmpty()) {
+                    field.setText(placeholder);
+                    field.setForeground(Color.GRAY);
+                }
+            }
+        });
+
+        return field;
+    }
+
+
+    private JLabel createIcon(String img, int x) {
+        ImageIcon icon = new ImageIcon(
+                new ImageIcon(getClass().getResource(img))
+                        .getImage().getScaledInstance(35, 20, Image.SCALE_SMOOTH)
+        );
+
+        JLabel lbl = new JLabel(icon);
+        lbl.setBounds(x, 18, 40, 25);
+        return lbl;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == payButton) {
-            dispose();
-            hotelmenu hm=new hotelmenu();
-            JOptionPane.showMessageDialog(this, "Payment Submitted!");
-            hm.setVisible(true);
+
+        if (e.getSource() == continueButton) {
+            JOptionPane.showMessageDialog(this,
+                    "Payment Successful!\nReceipt sent to email.");
         }
-        else if(e.getSource()==backButton){
+
+        else if (e.getSource() == cancelButton) {
             dispose();
             JOptionPane.showMessageDialog(this, "Payment Cancelled!");
-            reservepage rp= new reservepage();
+            reservepage rp = new reservepage();
             rp.setVisible(true);
         }
-        
     }
-    
 }

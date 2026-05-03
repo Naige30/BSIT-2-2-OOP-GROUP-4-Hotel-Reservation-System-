@@ -1,17 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package hotel.reservation.system;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 import java.awt.*;
-/**
- *
- * @author Naige
- */
+
 public class hotelmenu extends JFrame implements ActionListener {
     private JButton reservebtn,viewbtn,cancelbtn,searchbtn,logoutbtn;
     private JLabel welcometxt,singleHeadline;
