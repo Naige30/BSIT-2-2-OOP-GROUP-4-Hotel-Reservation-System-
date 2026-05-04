@@ -1,4 +1,3 @@
-
 package hotel.reservation.system;
 
 import java.awt.event.ActionEvent;
@@ -11,9 +10,7 @@ public class hotelmenu extends JFrame implements ActionListener {
     private JLabel welcometxt,singleHeadline;
     private JTextArea hotels;
 
-    
-    
-    
+
     hotelmenu(){
         setSize(1000,880);
         setTitle("Giovanni Madrigal Grand Hotel: A Hotel Reservation System");
