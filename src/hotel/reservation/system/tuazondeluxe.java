@@ -5,10 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
-/**
- *
- * @author Naige
- */
+
 public class tuazondeluxe extends JFrame implements ActionListener {
     private final JLabel title, roomName, img1, img2;
     private final JSeparator line; 

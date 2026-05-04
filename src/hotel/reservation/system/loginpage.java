@@ -8,12 +8,12 @@ import javax.swing.*;
 
 
 public class loginpage extends JFrame implements ActionListener {
-    private JTextField user;
-    private JButton Login,signup;
-    private JLabel header,header2,subheader,username,password,sideImage,option1,address;
-    private JPasswordField pass;
-    private JSeparator line;
-    private ImageIcon originalIcon;
+    private final JTextField user;
+    private final JButton Login,signup;
+    private final JLabel header,header2,subheader,username,password,sideImage,option1,address;
+    private final JPasswordField pass;
+    private final JSeparator line;
+    private final ImageIcon originalIcon;
 
     
     

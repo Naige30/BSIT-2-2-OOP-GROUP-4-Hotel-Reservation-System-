@@ -8,9 +8,7 @@ public class payment extends JFrame implements ActionListener {
 
     private final JTextField nameField, cardField, cvcField, emailField;
     private final JComboBox<String> monthBox, yearBox;
-
     private final JButton continueButton, cancelButton;
-
     private final Font TITLE_FONT = new Font("Segoe UI", Font.BOLD, 20);
     private final Font LABEL_FONT = new Font("Segoe UI", Font.PLAIN, 13);
     private final Font INPUT_FONT = new Font("Segoe UI", Font.PLAIN, 14);

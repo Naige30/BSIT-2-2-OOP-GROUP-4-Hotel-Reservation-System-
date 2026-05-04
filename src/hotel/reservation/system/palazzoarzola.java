@@ -5,10 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
-/**
- *
- * @author Naige
- */
+
 public class palazzoarzola extends JFrame implements ActionListener {
     private final JLabel title, roomName, img1, img2, img3;
     private final JSeparator line; 

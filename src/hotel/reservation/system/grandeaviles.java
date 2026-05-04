@@ -5,10 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
-/**
- *
- * @author Naige
- */
+
 public class grandeaviles extends JFrame implements ActionListener {
     private final JLabel title, roomName, imgBed;
     private final JSeparator line; 
@@ -62,7 +59,7 @@ public class grandeaviles extends JFrame implements ActionListener {
         
         imgBed = new JLabel();
         imgBed.setBounds(60, 170, 880, 320); 
-        ImageIcon rawImg1 = new ImageIcon(getClass().getResource("grandeaviles1.jpg"));
+        ImageIcon rawImg1 = new ImageIcon(getClass().getResource("grandeaviles2.jpg"));
         Image scaledImg1 = rawImg1.getImage().getScaledInstance(880, 320, Image.SCALE_SMOOTH);
         imgBed.setIcon(new ImageIcon(scaledImg1));
         add(imgBed);
