@@ -6,10 +6,10 @@ import javax.swing.*;
 
 public class payment extends JFrame implements ActionListener {
 
-    private JTextField nameField, cardField, cvcField, emailField;
-    private JComboBox<String> monthBox, yearBox;
+    private final JTextField nameField, cardField, cvcField, emailField;
+    private final JComboBox<String> monthBox, yearBox;
 
-    private JButton continueButton, cancelButton;
+    private final JButton continueButton, cancelButton;
 
     private final Font TITLE_FONT = new Font("Segoe UI", Font.BOLD, 20);
     private final Font LABEL_FONT = new Font("Segoe UI", Font.PLAIN, 13);
@@ -54,22 +54,23 @@ public class payment extends JFrame implements ActionListener {
         pmLabel.setBounds(10, 10, 150, 40);
         paymentBox.add(pmLabel);
 
-        paymentBox.add(createIcon("mastercard.png", 150));
-        paymentBox.add(createIcon("visa.png", 190));
-        paymentBox.add(createIcon("americanexpress.png", 230));
+        paymentBox.add(createIcon("mastercard.png", 140));
+        paymentBox.add(createIcon("visa.png", 180));
+        paymentBox.add(createIcon("americanexpress.png", 220));
+        paymentBox.add(createIcon("applepay.png", 260));
 
 
-        panel.add(createLabel("Card Owner", 15, 95));
+        panel.add(createLabel("Account Holder Name", 15, 95));
         nameField = createField("Name", 15, 120);
         panel.add(nameField);
 
 
-        panel.add(createLabel("Card number", 15, 170));
+        panel.add(createLabel("Card Number", 15, 170));
         cardField = createField("0000 0000 0000 0000", 15, 195);
         panel.add(cardField);
 
 
-        panel.add(createLabel("Card Expiration", 15, 245));
+        panel.add(createLabel("Expiry Date", 15, 245));
 
         String[] months = {
                 "Month","01","02","03","04","05","06",

@@ -97,7 +97,7 @@ public class loginpage extends JFrame implements ActionListener {
         add(Login);
         Login.addActionListener(this);
         
-        option1 = new JLabel("No account? Sign up to save your orders and check out faster.");
+        option1 = new JLabel("No account? Sign up to save your info and check out faster.");
         option1.setFont(new Font("SansSerif", Font.PLAIN, 10));
         option1.setForeground(new Color(120, 120, 120));
         option1.setHorizontalAlignment(SwingConstants.CENTER); 
