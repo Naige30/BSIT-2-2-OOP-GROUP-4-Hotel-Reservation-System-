@@ -150,10 +150,6 @@ public class signup extends JFrame implements ActionListener {
         
       
        
-                
-        
-
-       
         
     }
 

@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 
 public class reservepage extends JFrame implements ActionListener {
@@ -20,6 +19,7 @@ public class reservepage extends JFrame implements ActionListener {
     private JLabel headline, welcometxt;
 
     public reservepage() {
+        
         setSize(1000, 975);
         setTitle("Giovanni Madrigal Grand Hotel: A Hotel Reservation System");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -29,7 +29,6 @@ public class reservepage extends JFrame implements ActionListener {
         setResizable(false);
         setIconImage(new ImageIcon(getClass().getResource("logo.png")).getImage());
 
-        
         ImageIcon rawImage = new ImageIcon(getClass().getResource("reserveheadline.png"));
         Image scaledImage = rawImage.getImage().getScaledInstance(1000, 250, Image.SCALE_SMOOTH);
         headline = new JLabel(new ImageIcon(scaledImage));
@@ -76,6 +75,7 @@ public class reservepage extends JFrame implements ActionListener {
         fld1.setBounds(100, 365, 385, 25);
         add(fld1);
 
+        
         ImageIcon userIconRaw2 = new ImageIcon(getClass().getResource("user2.png"));
         Image userScaled2 = userIconRaw2.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         lname = new JLabel("LAST NAME", new ImageIcon(userScaled2), SwingConstants.LEFT);
@@ -102,7 +102,10 @@ public class reservepage extends JFrame implements ActionListener {
         add(fld3);
 
         
-        city = new JLabel("CITY");
+        ImageIcon cityIconRaw = new ImageIcon(getClass().getResource("address2.png"));
+        Image cityScaled = cityIconRaw.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+        city = new JLabel("CITY", new ImageIcon(cityScaled), SwingConstants.LEFT);
+        city.setIconTextGap(5);
         city.setFont(new Font("SansSerif", Font.BOLD, 10));
         city.setBounds(100, 475, 100, 20); 
         add(city);
@@ -111,7 +114,11 @@ public class reservepage extends JFrame implements ActionListener {
         fld5.setBounds(100, 500, 250, 25);
         add(fld5);
 
-        state = new JLabel("STATE");
+        
+        ImageIcon stateIconRaw = new ImageIcon(getClass().getResource("address3.png"));
+        Image stateScaled = stateIconRaw.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+        state = new JLabel("STATE", new ImageIcon(stateScaled), SwingConstants.LEFT);
+        state.setIconTextGap(5);
         state.setFont(new Font("SansSerif", Font.BOLD, 10));
         state.setBounds(375, 475, 100, 20);
         add(state);
@@ -120,7 +127,11 @@ public class reservepage extends JFrame implements ActionListener {
         fld6.setBounds(375, 500, 250, 25);
         add(fld6);
 
-        zip = new JLabel("ZIP CODE");
+        
+        ImageIcon zipIconRaw = new ImageIcon(getClass().getResource("address4.png"));
+        Image zipScaled = zipIconRaw.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+        zip = new JLabel("ZIP CODE", new ImageIcon(zipScaled), SwingConstants.LEFT);
+        zip.setIconTextGap(5);
         zip.setFont(new Font("SansSerif", Font.BOLD, 10));
         zip.setBounds(650, 475, 100, 20);
         add(zip);
@@ -130,7 +141,10 @@ public class reservepage extends JFrame implements ActionListener {
         add(fld7);
 
         
-        phone = new JLabel("PHONE NUMBER");
+        ImageIcon phoneIconRaw = new ImageIcon(getClass().getResource("phone.png"));
+        Image phoneScaled = phoneIconRaw.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+        phone = new JLabel("PHONE NUMBER", new ImageIcon(phoneScaled), SwingConstants.LEFT);
+        phone.setIconTextGap(5);
         phone.setFont(new Font("SansSerif", Font.BOLD, 10));
         phone.setBounds(100, 545, 150, 20);
         add(phone);
@@ -139,7 +153,11 @@ public class reservepage extends JFrame implements ActionListener {
         fld8.setBounds(100, 570, 385, 25);
         add(fld8);
 
-        email = new JLabel("E-MAIL ADDRESS");
+        
+        ImageIcon emailIconRaw = new ImageIcon(getClass().getResource("email.png"));
+        Image emailScaled = emailIconRaw.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+        email = new JLabel("E-MAIL ADDRESS", new ImageIcon(emailScaled), SwingConstants.LEFT);
+        email.setIconTextGap(5);
         email.setFont(new Font("SansSerif", Font.BOLD, 10));
         email.setBounds(515, 545, 150, 20);
         add(email);
@@ -169,6 +187,7 @@ public class reservepage extends JFrame implements ActionListener {
         addPlaceholderBehavior(fld11, "HH:MM AM/PM");
         add(fld11);
 
+        
         ImageIcon checkOutIconRaw = new ImageIcon(getClass().getResource("date2.png"));
         Image checkOutScaled = checkOutIconRaw.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         outdate = new JLabel("CHECK-OUT (DATE / TIME)", new ImageIcon(checkOutScaled), SwingConstants.LEFT);
@@ -189,7 +208,6 @@ public class reservepage extends JFrame implements ActionListener {
         addPlaceholderBehavior(fld13, "HH:MM AM/PM");
         add(fld13);
 
-        
         pref = new JLabel("ROOM PREFERENCE");
         pref.setFont(new Font("SansSerif", Font.BOLD, 10));
         pref.setBounds(100, 685, 200, 20);
@@ -218,7 +236,11 @@ public class reservepage extends JFrame implements ActionListener {
         ButtonGroup group = new ButtonGroup();
         group.add(standard); group.add(deluxe); group.add(suite); group.add(luh);
 
-        adult = new JLabel("NUMBER OF ADULTS");
+        
+        ImageIcon adultIconRaw = new ImageIcon(getClass().getResource("adults.png"));
+        Image adultScaled = adultIconRaw.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+        adult = new JLabel("NUMBER OF ADULTS", new ImageIcon(adultScaled), SwingConstants.LEFT);
+        adult.setIconTextGap(5);
         adult.setFont(new Font("SansSerif", Font.BOLD, 10));
         adult.setBounds(515, 685, 160, 20);
         add(adult);
@@ -227,7 +249,11 @@ public class reservepage extends JFrame implements ActionListener {
         fld14.setBounds(515, 710, 185, 25);
         add(fld14);
 
-        child = new JLabel("NUMBER OF CHILDREN");
+        
+        ImageIcon childIconRaw = new ImageIcon(getClass().getResource("childrens.png"));
+        Image childScaled = childIconRaw.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+        child = new JLabel("NUMBER OF CHILDREN", new ImageIcon(childScaled), SwingConstants.LEFT);
+        child.setIconTextGap(5);
         child.setFont(new Font("SansSerif", Font.BOLD, 10));
         child.setBounds(715, 685, 160, 20);
         add(child);
@@ -237,7 +263,10 @@ public class reservepage extends JFrame implements ActionListener {
         add(fld15);
 
         
-        x = new JLabel("SPECIAL INSTRUCTIONS");
+        ImageIcon specialIconRaw = new ImageIcon(getClass().getResource("instructions.png")); 
+        Image specialScaled = specialIconRaw.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+        x = new JLabel("SPECIAL INSTRUCTIONS", new ImageIcon(specialScaled), SwingConstants.LEFT);
+        x.setIconTextGap(5);
         x.setFont(new Font("SansSerif", Font.BOLD, 10));
         x.setBounds(100, 770, 200, 20); 
         add(x);
@@ -249,7 +278,6 @@ public class reservepage extends JFrame implements ActionListener {
         y.setLineWrap(true);
         add(y);
 
-        
         submit = new JButton("Confirm Reservation");
         submit.setFont(new Font("SansSerif", Font.BOLD, 12));
         submit.setBackground(new Color(27, 60, 83));
@@ -268,7 +296,6 @@ public class reservepage extends JFrame implements ActionListener {
         setVisible(true);
     }
 
-    
     private void addPlaceholderBehavior(JTextField field, String placeholder) {
         field.addFocusListener(new FocusListener() {
             @Override
@@ -297,7 +324,6 @@ public class reservepage extends JFrame implements ActionListener {
         }
 
         if (e.getSource() == submit) {
-            
             if (fld1.getText().isEmpty() || 
                 fld2.getText().isEmpty() || 
                 fld3.getText().isEmpty() || 
@@ -308,17 +334,14 @@ public class reservepage extends JFrame implements ActionListener {
                 return;
             }
 
-            
             String roomPref = "";
             if (standard.isSelected()) roomPref = "Tuazon Deluxe";
             else if (deluxe.isSelected()) roomPref = "Grande Aviles";
             else if (suite.isSelected()) roomPref = "Casa Lacao";
             else if (luh.isSelected()) roomPref = "Palazzo Arzola";
 
-            
             JOptionPane.showMessageDialog(this, "Reservation Added!");
             this.dispose();
-            
             
             new SummaryPage(
                 fld1.getText(), fld2.getText(), fld3.getText(), "",

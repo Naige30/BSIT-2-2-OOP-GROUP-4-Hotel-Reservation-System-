@@ -114,7 +114,7 @@ public class loginpage extends JFrame implements ActionListener {
         signup.addActionListener(this);
         
         ImageIcon pinIconRaw = new ImageIcon(getClass().getResource("pin.png"));
-        Image pinScaled = pinIconRaw.getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH);
+        Image pinScaled = pinIconRaw.getImage().getScaledInstance(22, 22, Image.SCALE_SMOOTH);
         ImageIcon pinIcon = new ImageIcon(pinScaled);
         
         address = new JLabel("SAN PEDRO ROAD, BIÑAN, MANILA, PHILIPPINES");
@@ -134,7 +134,7 @@ public class loginpage extends JFrame implements ActionListener {
         if(e.getSource()==Login){
             if(user.getText().equals("")&&pass.getText().equals("")){;
             dispose();
-            JOptionPane.showMessageDialog(this, "Log in Successful!");
+            JOptionPane.showMessageDialog(this, "Log in Successful!", "Welcome to Giovanni Madrigal's", JOptionPane.INFORMATION_MESSAGE);
             hotelmenu hm=new hotelmenu();
             hm.setVisible(true);
            

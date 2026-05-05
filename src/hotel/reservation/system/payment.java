@@ -177,15 +177,35 @@ public class payment extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == continueButton) {
-            JOptionPane.showMessageDialog(this,
-                    "Payment Successful!\nReceipt sent to email.");
-        }
+            
+            if (nameField.getText().equals("Name") || cardField.getText().equals("0000 0000 0000 0000")) {
+                JOptionPane.showMessageDialog(this, "Please fill in all payment details.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
 
+            
+            JOptionPane.showMessageDialog(this, 
+                "Payment Successful!\nReceipt sent to: " + emailField.getText(), 
+                "Success", 
+                JOptionPane.INFORMATION_MESSAGE);
+            
+            
+            this.dispose();
+            
+            
+            new hotelmenu().setVisible(true); 
+        } 
+        
         else if (e.getSource() == cancelButton) {
-            dispose();
-            JOptionPane.showMessageDialog(this, "Payment Cancelled!");
-            reservepage rp = new reservepage();
-            rp.setVisible(true);
+            int confirm = JOptionPane.showConfirmDialog(this, 
+                "Are you sure you want to cancel the payment?", 
+                "Cancel Payment", 
+                JOptionPane.YES_NO_OPTION);
+                
+            if (confirm == JOptionPane.YES_OPTION) {
+                this.dispose();
+                new reservepage().setVisible(true);
+            }
         }
     }
 }

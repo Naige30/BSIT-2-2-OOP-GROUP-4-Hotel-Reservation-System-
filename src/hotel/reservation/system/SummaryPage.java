@@ -6,17 +6,14 @@ import javax.swing.*;
 import java.awt.*;
 import javax.swing.border.LineBorder;
 
-
 public class SummaryPage extends JFrame implements ActionListener {
     
-    JLabel welcome,titlelbl,reqLbl;
+    JLabel welcome, titlelbl, reqLbl;
     JButton done, cancel;
     JSeparator separator;
     JTextArea notesArea;
     JScrollPane scroll;
 
-    
-    
     SummaryPage(
         String fname, String lname,
         String add1, String add2,
@@ -32,111 +29,122 @@ public class SummaryPage extends JFrame implements ActionListener {
         setTitle("Reservation Summary");
         setSize(750, 650);
         setLayout(null);
+        getContentPane().setBackground(Color.WHITE);
         setLocationRelativeTo(null);
         setResizable(false);
         setIconImage(new ImageIcon(getClass().getResource("logo.png")).getImage());
 
-        int y = 100;
+        int y = 110;
         
         titlelbl = new JLabel("Summary", SwingConstants.CENTER);
-        titlelbl.setFont(new Font("Serif", Font.BOLD, 32)); 
-        titlelbl.setBounds(0, 15, 750, 40);
+        titlelbl.setFont(new Font("Segoe UI", Font.BOLD, 30)); 
+        titlelbl.setBounds(0, 20, 750, 40);
         add(titlelbl);
         
         welcome = new JLabel("We welcome you to an unforgettable stay!", SwingConstants.CENTER);
-        welcome.setFont(new Font("Serif", Font.ITALIC, 15));
-        welcome.setForeground(new Color(120, 120, 120));
-        welcome.setBounds(0, 55, 750, 20);
+        welcome.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        welcome.setForeground(new Color(140, 140, 140));
+        welcome.setBounds(0, 60, 750, 20);
         add(welcome);
         
         separator = new JSeparator();
-        separator.setBounds(40, 85, 600, 1);
-        separator.setForeground(new Color(225, 225, 225));
+        separator.setBounds(75, 90, 600, 1);
+        separator.setForeground(new Color(230, 230, 230));
         add(separator);
 
-        addLabel("Guest Identity: " + fname + " " + lname, y); y += 35;
-        addLabel("Residence: " + add1 + ", " + add2 + ", " + city + ", " + state + " " + zip, y); y += 35;
-        addLabel("Contact: " + email + " | " + phone, y); y += 35;
+        
+        addRow("Guest Identity:", fname + " " + lname, y); y += 40;
+        addRow("Residence:", add1 + ", " + add2 + ", " + city + ", " + state + " " + zip, y); y += 40;
+        addRow("Contact:", email + " | " + phone, y); y += 40;
+        
+        y += 10; 
 
-        addLabel("Check-in: " + indate + " at " + intime, y); y += 35;
-        addLabel("Check-out: " + outdate + " at " + outtime, y); y += 35;
-
-        addLabel("Room Type: " + roomPref, y); y += 30;
-
-        addLabel("Accommodation: " + roomPref + " (" + adults + " Adults, " + children + " Children)", y); y += 35;
+        addRow("Check-in:", indate + " at " + intime, y); y += 40;
+        addRow("Check-out:", outdate + " at " + outtime, y); y += 40;
+        addRow("Accommodation:", roomPref + " (" + adults + " Adults, " + children + " Children)", y); y += 45;
 
         reqLbl = new JLabel("Special Requests:");
-        reqLbl.setFont(new Font("SansSerif", Font.BOLD, 13));
+        reqLbl.setFont(new Font("Segoe UI", Font.BOLD, 14));
         reqLbl.setBounds(75, y, 600, 20);
         add(reqLbl);
         y += 25;
         
         notesArea = new JTextArea(notes.isEmpty() ? "None" : notes);
-        notesArea.setFont(new Font("SansSerif", Font.PLAIN, 13));
-        notesArea.setForeground(new Color(80, 80, 80));
+        notesArea.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+        notesArea.setForeground(new Color(90, 90, 90));
         notesArea.setLineWrap(true);
         notesArea.setWrapStyleWord(true);
         notesArea.setEditable(false);
-        notesArea.setBackground(new Color(252, 252, 252));
+        notesArea.setMargin(new Insets(8, 8, 8, 8));
+        notesArea.setBackground(new Color(250, 250, 250));
         
         scroll = new JScrollPane(notesArea);
         scroll.setBorder(new LineBorder(new Color(230, 230, 230)));
-        scroll.setBounds(75, y, 600, 70); 
+        scroll.setBounds(75, y, 600, 75); 
         add(scroll);
-        y += 90;
+        y += 100;
 
+        
         cancel = new JButton("Cancel Reservation");
-        cancel.setBackground(new Color(245, 245, 245));
+        cancel.setBackground(new Color(245, 245, 245)); 
         cancel.setForeground(Color.DARK_GRAY);
-        cancel.setBorder(new LineBorder(new Color(225, 225, 225), 1));
+        cancel.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        cancel.setBorder(new LineBorder(new Color(220, 220, 220), 1));
         cancel.setFocusPainted(false);
-        cancel.setBounds(175, y, 160, 40);
+        cancel.setBounds(175, y, 170, 42);
         add(cancel);
         
-        done = new JButton("Payment");
-        done.setBounds(365, y, 200, 40);
-        done.setBackground(new Color(69, 104, 130));
+        done = new JButton("Proceed to Payment");
+        done.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        done.setBounds(360, y, 210, 42);
+        done.setBackground(new Color(69, 104, 130)); 
         done.setForeground(Color.WHITE);
         done.setFocusPainted(false);
         done.setBorder(null);
         add(done);
-        
 
         done.addActionListener(this);
         cancel.addActionListener(this);
-        
 
         setVisible(true);
     }
 
-    private void addLabel(String text, int y) {
-        JLabel label = new JLabel(text);
-        label.setFont(new Font("SansSerif", Font.PLAIN, 13));
-        label.setForeground(new Color(80, 80, 80));
-        label.setBounds(75, y, 600, 25);
-        label.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(248, 248, 248)));
-        add(label);
+    
+    private void addRow(String header, String data, int y) {
+        JLabel headerLbl = new JLabel(header);
+        headerLbl.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        headerLbl.setForeground(new Color(50, 50, 50));
+        headerLbl.setBounds(75, y, 140, 25);
+        add(headerLbl);
+
+        JLabel dataLbl = new JLabel(data);
+        dataLbl.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        dataLbl.setForeground(new Color(80, 80, 80));
+        dataLbl.setBounds(215, y, 460, 25);
+        add(dataLbl);
+        
+        
+        JSeparator line = new JSeparator();
+        line.setBounds(75, y + 30, 600, 1);
+        line.setForeground(new Color(245, 245, 245));
+        add(line);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
-     if (e.getSource() == done) {
+        if (e.getSource() == done) {
             this.dispose();
             new payment().setVisible(true);
-        }
-        else if (e.getSource() == cancel) {
+        } else if (e.getSource() == cancel) {
             int response = JOptionPane.showConfirmDialog(this, 
                 "Are you sure you want to cancel your reservation?", 
                 "Confirm Cancellation", 
-                JOptionPane.YES_NO_OPTION, 
-                JOptionPane.QUESTION_MESSAGE);
+                JOptionPane.YES_NO_OPTION);
             
             if (response == JOptionPane.YES_OPTION) {
-            JOptionPane.showMessageDialog(this, "Reservation Cancelled!");
-            this.dispose();
-            new hotelmenu().setVisible(true);
+                this.dispose();
+                new hotelmenu().setVisible(true);
+            }
         }
     }
-  }
 }
