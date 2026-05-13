@@ -194,5 +194,9 @@ public class hotelmenu extends JFrame implements ActionListener {
             dispose();
             new searchpage().setVisible(true);
         }
+        else if(e.getSource()==cancelbtn){
+            dispose();
+            new cancelpage().setVisible(true);
+        }
     }
 }
