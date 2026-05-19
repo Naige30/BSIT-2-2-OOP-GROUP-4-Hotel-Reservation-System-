@@ -1,5 +1,5 @@
-package hotel.reservation.system;
-
+package hotel.reservation.system.view;
+import hotel.reservation.system.model.Room;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
@@ -14,7 +14,7 @@ public class SummaryPage extends JFrame implements ActionListener {
     JTextArea notesArea;
     JScrollPane scroll;
 
-    SummaryPage(
+ public   SummaryPage(
         String fname, String lname,
         String add1, String add2,
         String city, String state, String zip,
@@ -32,7 +32,7 @@ public class SummaryPage extends JFrame implements ActionListener {
         getContentPane().setBackground(Color.WHITE);
         setLocationRelativeTo(null);
         setResizable(false);
-        setIconImage(new ImageIcon(getClass().getResource("logo.png")).getImage());
+        setIconImage(new ImageIcon(getClass().getResource("/hotel/reservation/system/resources/logo.png")).getImage());
 
         int y = 110;
         

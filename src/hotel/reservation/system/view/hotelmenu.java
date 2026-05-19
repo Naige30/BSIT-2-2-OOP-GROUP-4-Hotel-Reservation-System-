@@ -1,5 +1,10 @@
-package hotel.reservation.system;
-
+package hotel.reservation.system.view;
+import hotel.reservation.system.model.Room;
+import hotel.reservation.system.view.loginpage;
+import hotel.reservation.system.view.reservepage;
+import hotel.reservation.system.view.searchpage;
+import hotel.reservation.system.view.cancelpage;
+import hotel.reservation.system.view.viewpage;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
@@ -19,10 +24,10 @@ public class hotelmenu extends JFrame implements ActionListener {
         setResizable(false);
         setLocationRelativeTo(null);
 
-        setIconImage(new ImageIcon(getClass().getResource("logo.png")).getImage());
+        setIconImage(new ImageIcon(getClass().getResource("/hotel/reservation/system/resources/logo.png")).getImage());
 
         
-        ImageIcon rawImage = new ImageIcon(getClass().getResource("headline.png"));
+        ImageIcon rawImage = new ImageIcon(getClass().getResource("/hotel/reservation/system/resources/headline.png"));
         Image scaledImage = rawImage.getImage().getScaledInstance(1000, 500, Image.SCALE_SMOOTH);
         singleHeadline = new JLabel(new ImageIcon(scaledImage));
         singleHeadline.setBounds(0, 0, 1000, 500);
@@ -57,7 +62,7 @@ public class hotelmenu extends JFrame implements ActionListener {
         card1.setBorder(new LineBorder(new Color(235, 235, 235), 1));
         card1.setBounds(450, 580, 500, 80);
         
-        ImageIcon heritageRaw = new ImageIcon(getClass().getResource("heritage.png"));
+        ImageIcon heritageRaw = new ImageIcon(getClass().getResource("/hotel/reservation/system/resources/heritage.png"));
         Image heritageScaled = heritageRaw.getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH);
         ImageIcon heritageIcon = new ImageIcon(heritageScaled);
 
@@ -84,7 +89,7 @@ public class hotelmenu extends JFrame implements ActionListener {
         card2.setBorder(new LineBorder(new Color(235, 235, 235), 1));
         card2.setBounds(450, 670, 500, 80);
 
-        ImageIcon comfortRaw = new ImageIcon(getClass().getResource("comfort.png"));
+        ImageIcon comfortRaw = new ImageIcon(getClass().getResource("/hotel/reservation/system/resources/comfort.png"));
         Image comfortScaled = comfortRaw.getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH);
         ImageIcon comfortIcon = new ImageIcon(comfortScaled);
 
@@ -111,7 +116,7 @@ public class hotelmenu extends JFrame implements ActionListener {
         card3.setBorder(new LineBorder(new Color(235, 235, 235), 1));
         card3.setBounds(450, 760, 500, 80);
 
-        ImageIcon luxuryRaw = new ImageIcon(getClass().getResource("luxury.png"));
+        ImageIcon luxuryRaw = new ImageIcon(getClass().getResource("/hotel/reservation/system/resources/luxury.png"));
         Image luxuryScaled = luxuryRaw.getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH);
         ImageIcon luxuryIcon = new ImageIcon(luxuryScaled);
 

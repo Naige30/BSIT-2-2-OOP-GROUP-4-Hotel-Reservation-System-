@@ -1,5 +1,6 @@
-package hotel.reservation.system;
+package hotel.reservation.system.view;
 
+import hotel.reservation.system.model.Room;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,7 +18,7 @@ public class loginpage extends JFrame implements ActionListener {
 
     
     
-    loginpage(){
+   public loginpage(){
         
        
         setSize(820,600);
@@ -29,8 +30,8 @@ public class loginpage extends JFrame implements ActionListener {
         setLocationRelativeTo(null);
         
         
-        setIconImage(new ImageIcon(getClass().getResource("logo.png")).getImage());
-        originalIcon = new ImageIcon(getClass().getResource("hotel.jpg"));
+        setIconImage(new ImageIcon(getClass().getResource("/hotel/reservation/system/resources/logo.png")).getImage());
+        originalIcon = new ImageIcon(getClass().getResource("/hotel/reservation/system/resources/hotel.jpg"));
         Image img = originalIcon.getImage();
         
 
@@ -113,7 +114,7 @@ public class loginpage extends JFrame implements ActionListener {
         add(signup);
         signup.addActionListener(this);
         
-        ImageIcon pinIconRaw = new ImageIcon(getClass().getResource("pin.png"));
+        ImageIcon pinIconRaw = new ImageIcon(getClass().getResource("/hotel/reservation/system/resources/pin.png"));
         Image pinScaled = pinIconRaw.getImage().getScaledInstance(22, 22, Image.SCALE_SMOOTH);
         ImageIcon pinIcon = new ImageIcon(pinScaled);
         

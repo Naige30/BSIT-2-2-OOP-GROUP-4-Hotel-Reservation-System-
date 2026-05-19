@@ -1,5 +1,6 @@
-package hotel.reservation.system;
+package hotel.reservation.system.view;
 
+import hotel.reservation.system.model.Room;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public class searchpage extends JFrame implements ActionListener {
         setResizable(false);
         setTitle("Giovanni Madrigal Grand Hotel | Search Page");
         
-        setIconImage(new ImageIcon(getClass().getResource("logo.png")).getImage());
+        setIconImage(new ImageIcon(getClass().getResource("/hotel/reservation/system/resources/logo.png")).getImage());
 
         JPanel mainPanel = new JPanel(new GridBagLayout());
         mainPanel.setBackground(Color.WHITE);

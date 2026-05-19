@@ -1,5 +1,5 @@
-package hotel.reservation.system;
-
+package hotel.reservation.system.view;
+import hotel.reservation.system.model.Room;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
@@ -25,7 +25,7 @@ public class signup extends JFrame implements ActionListener {
         setLocationRelativeTo(null);
         setResizable(false);
 
-        setIconImage(new ImageIcon(getClass().getResource("logo.png")).getImage());
+        setIconImage(new ImageIcon(getClass().getResource("/hotel/reservation/system/resources/logo.png")).getImage());
         
         titlelbl = new JLabel("Sign Up",SwingConstants.CENTER);
         titlelbl.setFont(new Font("Serif", Font.BOLD, 36));
