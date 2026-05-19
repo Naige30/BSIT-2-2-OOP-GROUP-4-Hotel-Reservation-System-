@@ -1,5 +1,5 @@
-package hotel.reservation.system;
-
+package hotel.reservation.system.view;
+import hotel.reservation.system.model.Room;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -20,7 +20,7 @@ public class viewpage extends JFrame implements ActionListener {
         setLocationRelativeTo(null);
         setResizable(false);
         getContentPane().setBackground(Color.WHITE);
-        setIconImage(new ImageIcon(getClass().getResource("logo.png")).getImage());
+        setIconImage(new ImageIcon(getClass().getResource("/hotel/reservation/system/resources/logo.png")).getImage());
 
         hotelName = new JLabel("GIOVANNI MADRIGAL GRAND HOTEL", SwingConstants.CENTER);
         hotelName.setBounds(0, 25, 1150, 30);
@@ -52,12 +52,12 @@ public class viewpage extends JFrame implements ActionListener {
         
         JPanel p1 = createPanel(40, 120);
         add(p1);
-        p1.add(createImg("tuazon1.jpg", 15, 15));
+        p1.add(createImg("/hotel/reservation/system/resources/tuazon1.jpg", 15, 15));
         p1.add(createTitle("TUAZON DELUXE", 285, 15));
         p1.add(createSep(285 + 65, 45));
-        p1.add(createDetail("Bed Configuration", "King or Twin Beds", "roompref.png", 285, 70));
-        p1.add(createDetail("Room Size", "37 – 41 sq m", "roomsize.png", 285, 125));
-        p1.add(createDetail("Occupancy", "2 Adults and 2 Children", "occupancy.png", 285, 180));
+        p1.add(createDetail("Bed Configuration", "King or Twin Beds", "/hotel/reservation/system/resources/roompref.png", 285, 70));
+        p1.add(createDetail("Room Size", "37 – 41 sq m", "/hotel/reservation/system/resources/roomsize.png", 285, 125));
+        p1.add(createDetail("Occupancy", "2 Adults and 2 Children", "/hotel/reservation/system/resources/occupancy.png", 285, 180));
         view1 = createViewBtn(285 + 35, 245);
         view1.addActionListener(this);
         p1.add(view1);
@@ -68,12 +68,12 @@ public class viewpage extends JFrame implements ActionListener {
         
         JPanel p2 = createPanel(585, 120);
         add(p2);
-        p2.add(createImg("grandeaviles1.jpg", 15, 15));
+        p2.add(createImg("/hotel/reservation/system/resources/grandeaviles1.jpg", 15, 15));
         p2.add(createTitle("GRANDE' AVILES", 285, 15));
         p2.add(createSep(285 + 65, 45));
-        p2.add(createDetail("Bed Configuration", "1 King Bed", "roompref.png", 285, 70));
-        p2.add(createDetail("Room Size", "61 sq m", "roomsize.png", 285, 125));
-        p2.add(createDetail("Occupancy", "4 People", "occupancy.png", 285, 180));
+        p2.add(createDetail("Bed Configuration", "1 King Bed", "/hotel/reservation/system/resources/roompref.png", 285, 70));
+        p2.add(createDetail("Room Size", "61 sq m", "/hotel/reservation/system/resources/roomsize.png", 285, 125));
+        p2.add(createDetail("Occupancy", "4 People", "/hotel/reservation/system/resources/occupancy.png", 285, 180));
         view2 = createViewBtn(285 + 35, 245);
         view2.addActionListener(this);
         p2.add(view2);
@@ -84,12 +84,12 @@ public class viewpage extends JFrame implements ActionListener {
         
         JPanel p3 = createPanel(40, 520);
         add(p3);
-        p3.add(createImg("casalacao1.jpg", 15, 15));
+        p3.add(createImg("/hotel/reservation/system/resources/casalacao1.jpg", 15, 15));
         p3.add(createTitle("CASA LACAO", 285, 15));
         p3.add(createSep(285 + 65, 45));
-        p3.add(createDetail("Bed Configuration", "3 King Beds", "roompref.png", 285, 70));
-        p3.add(createDetail("Room Size", "180 sq m", "roomsize.png", 285, 125));
-        p3.add(createDetail("Occupancy", "4–8 Persons", "occupancy.png", 285, 180));
+        p3.add(createDetail("Bed Configuration", "3 King Beds", "/hotel/reservation/system/resources/roompref.png", 285, 70));
+        p3.add(createDetail("Room Size", "180 sq m", "/hotel/reservation/system/resources/roomsize.png", 285, 125));
+        p3.add(createDetail("Occupancy", "4–8 Persons", "/hotel/reservation/system/resources/occupancy.png", 285, 180));
         view3 = createViewBtn(285 + 35, 245);
         view3.addActionListener(this);
         p3.add(view3);
@@ -100,12 +100,12 @@ public class viewpage extends JFrame implements ActionListener {
         
         JPanel p4 = createPanel(585, 520);
         add(p4);
-        p4.add(createImg("palazzoarzola1.jpg", 15, 15));
+        p4.add(createImg("/hotel/reservation/system/resources/palazzoarzola1.jpg", 15, 15));
         p4.add(createTitle("PALAZZO ARZOLA", 285, 15));
         p4.add(createSep(285 + 65, 45));
-        p4.add(createDetail("Bed Configuration", "2 King Beds", "roompref.png", 285, 70));
-        p4.add(createDetail("Room Size", "200 sq m", "roomsize.png", 285, 125));
-        p4.add(createDetail("Occupancy", "3–6 Persons", "occupancy.png", 285, 180));
+        p4.add(createDetail("Bed Configuration", "2 King Beds", "/hotel/reservation/system/resources/roompref.png", 285, 70));
+        p4.add(createDetail("Room Size", "200 sq m", "/hotel/reservation/system/resources/roomsize.png", 285, 125));
+        p4.add(createDetail("Occupancy", "3–6 Persons", "/hotel/reservation/system/resources/occupancy.png", 285, 180));
         view4 = createViewBtn(285 + 35, 245);
         view4.addActionListener(this);
         p4.add(view4);

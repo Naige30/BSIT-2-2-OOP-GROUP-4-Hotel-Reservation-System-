@@ -1,4 +1,5 @@
-package hotel.reservation.system;
+package hotel.reservation.system.view;
+import hotel.reservation.system.model.Room; 
 
 import java.awt.*;
 import java.awt.event.*;
@@ -9,6 +10,7 @@ import javax.swing.border.MatteBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+
 
 public class cancelpage extends JFrame implements ActionListener {
     private final JTextField txtSearch;
@@ -26,7 +28,7 @@ public class cancelpage extends JFrame implements ActionListener {
         setResizable(false);
         setTitle("Giovanni Madrigal Grand Hotel | Cancel Page");
         
-        setIconImage(new ImageIcon(getClass().getResource("logo.png")).getImage());
+        setIconImage(new ImageIcon(getClass().getResource("/hotel/reservation/system/resources/logo.png")).getImage());
 
 
         JPanel mainPanel = new JPanel(new GridBagLayout());

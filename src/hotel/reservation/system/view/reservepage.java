@@ -1,5 +1,6 @@
-package hotel.reservation.system;
-
+package hotel.reservation.system.view;
+import hotel.reservation.system.model.Room;
+import hotel.reservation.system.view.SummaryPage;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -31,9 +32,9 @@ public class reservepage extends JFrame implements ActionListener {
         setLocationRelativeTo(null);
         getContentPane().setBackground(Color.WHITE);
         setResizable(false);
-        setIconImage(new ImageIcon(getClass().getResource("logo.png")).getImage());
+        setIconImage(new ImageIcon(getClass().getResource("/hotel/reservation/system/resources/logo.png")).getImage());
 
-        ImageIcon rawImage = new ImageIcon(getClass().getResource("reserveheadline.png"));
+        ImageIcon rawImage = new ImageIcon(getClass().getResource("/hotel/reservation/system/resources/reserveheadline.png"));
         Image scaledImage = rawImage.getImage().getScaledInstance(1000, 250, Image.SCALE_SMOOTH);
         headline = new JLabel(new ImageIcon(scaledImage));
         headline.setBounds(0, 0, 1000, 250);
@@ -67,7 +68,7 @@ public class reservepage extends JFrame implements ActionListener {
         add(contactEmail);
 
         
-        ImageIcon userIconRaw = new ImageIcon(getClass().getResource("user.png"));
+        ImageIcon userIconRaw = new ImageIcon(getClass().getResource("/hotel/reservation/system/resources/user.png"));
         Image userScaled = userIconRaw.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         fname = new JLabel("FIRST NAME", new ImageIcon(userScaled), SwingConstants.LEFT);
         fname.setIconTextGap(8);
@@ -80,7 +81,7 @@ public class reservepage extends JFrame implements ActionListener {
         add(fld1);
 
         
-        ImageIcon userIconRaw2 = new ImageIcon(getClass().getResource("user2.png"));
+        ImageIcon userIconRaw2 = new ImageIcon(getClass().getResource("/hotel/reservation/system/resources/user2.png"));
         Image userScaled2 = userIconRaw2.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         lname = new JLabel("LAST NAME", new ImageIcon(userScaled2), SwingConstants.LEFT);
         lname.setIconTextGap(5);
@@ -93,7 +94,7 @@ public class reservepage extends JFrame implements ActionListener {
         add(fld2);
 
         
-        ImageIcon addressIconRaw = new ImageIcon(getClass().getResource("address.png"));
+        ImageIcon addressIconRaw = new ImageIcon(getClass().getResource("/hotel/reservation/system/resources/address.png"));
         Image addressScaled = addressIconRaw.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         add1 = new JLabel("ADDRESS", new ImageIcon(addressScaled), SwingConstants.LEFT);
         add1.setIconTextGap(5);
@@ -106,7 +107,7 @@ public class reservepage extends JFrame implements ActionListener {
         add(fld3);
 
         
-        ImageIcon cityIconRaw = new ImageIcon(getClass().getResource("address2.png"));
+        ImageIcon cityIconRaw = new ImageIcon(getClass().getResource("/hotel/reservation/system/resources/address2.png"));
         Image cityScaled = cityIconRaw.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         city = new JLabel("CITY", new ImageIcon(cityScaled), SwingConstants.LEFT);
         city.setIconTextGap(5);
@@ -119,7 +120,7 @@ public class reservepage extends JFrame implements ActionListener {
         add(fld5);
 
         
-        ImageIcon stateIconRaw = new ImageIcon(getClass().getResource("address3.png"));
+        ImageIcon stateIconRaw = new ImageIcon(getClass().getResource("/hotel/reservation/system/resources/address3.png"));
         Image stateScaled = stateIconRaw.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         state = new JLabel("STATE", new ImageIcon(stateScaled), SwingConstants.LEFT);
         state.setIconTextGap(5);
@@ -132,7 +133,7 @@ public class reservepage extends JFrame implements ActionListener {
         add(fld6);
 
         
-        ImageIcon zipIconRaw = new ImageIcon(getClass().getResource("address4.png"));
+        ImageIcon zipIconRaw = new ImageIcon(getClass().getResource("/hotel/reservation/system/resources/address4.png"));
         Image zipScaled = zipIconRaw.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         zip = new JLabel("ZIP CODE", new ImageIcon(zipScaled), SwingConstants.LEFT);
         zip.setIconTextGap(5);
@@ -145,7 +146,7 @@ public class reservepage extends JFrame implements ActionListener {
         add(fld7);
 
         
-        ImageIcon phoneIconRaw = new ImageIcon(getClass().getResource("phone.png"));
+        ImageIcon phoneIconRaw = new ImageIcon(getClass().getResource("/hotel/reservation/system/resources/phone.png"));
         Image phoneScaled = phoneIconRaw.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         phone = new JLabel("PHONE NUMBER", new ImageIcon(phoneScaled), SwingConstants.LEFT);
         phone.setIconTextGap(5);
@@ -158,7 +159,7 @@ public class reservepage extends JFrame implements ActionListener {
         add(fld8);
 
         
-        ImageIcon emailIconRaw = new ImageIcon(getClass().getResource("email.png"));
+        ImageIcon emailIconRaw = new ImageIcon(getClass().getResource("/hotel/reservation/system/resources/email.png"));
         Image emailScaled = emailIconRaw.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         email = new JLabel("E-MAIL ADDRESS", new ImageIcon(emailScaled), SwingConstants.LEFT);
         email.setIconTextGap(5);
@@ -192,7 +193,7 @@ public class reservepage extends JFrame implements ActionListener {
 
         String[] ampm = {"AM", "PM"};
 
-        ImageIcon checkInIconRaw = new ImageIcon(getClass().getResource("date.png"));
+        ImageIcon checkInIconRaw = new ImageIcon(getClass().getResource("/hotel/reservation/system/resources/date.png"));
         Image checkInScaled = checkInIconRaw.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         indate = new JLabel("CHECK-IN (DATE / TIME)", new ImageIcon(checkInScaled), SwingConstants.LEFT);
         indate.setIconTextGap(5);
@@ -225,7 +226,7 @@ public class reservepage extends JFrame implements ActionListener {
         inAmPmCombo.setBackground(Color.WHITE);
         add(inAmPmCombo);
 
-        ImageIcon checkOutIconRaw = new ImageIcon(getClass().getResource("date2.png"));
+        ImageIcon checkOutIconRaw = new ImageIcon(getClass().getResource("/hotel/reservation/system/resources/date2.png"));
         Image checkOutScaled = checkOutIconRaw.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         outdate = new JLabel("CHECK-OUT (DATE / TIME)", new ImageIcon(checkOutScaled), SwingConstants.LEFT);
         outdate.setIconTextGap(5);
@@ -258,7 +259,7 @@ public class reservepage extends JFrame implements ActionListener {
         outAmPmCombo.setBackground(Color.WHITE);
         add(outAmPmCombo);
         
-        ImageIcon roomPrefIconRaw = new ImageIcon(getClass().getResource("roompref.png"));
+        ImageIcon roomPrefIconRaw = new ImageIcon(getClass().getResource("/hotel/reservation/system/resources/roompref.png"));
         Image roomPrefScaled = roomPrefIconRaw.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         pref = new JLabel("ROOM PREFERENCE", new ImageIcon(roomPrefScaled), SwingConstants.LEFT);
         pref.setFont(new Font("SansSerif", Font.BOLD, 10));
@@ -289,7 +290,7 @@ public class reservepage extends JFrame implements ActionListener {
         group.add(standard); group.add(deluxe); group.add(suite); group.add(luh);
 
         
-        ImageIcon adultIconRaw = new ImageIcon(getClass().getResource("adults.png"));
+        ImageIcon adultIconRaw = new ImageIcon(getClass().getResource("/hotel/reservation/system/resources/adults.png"));
         Image adultScaled = adultIconRaw.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         adult = new JLabel("NUMBER OF ADULTS", new ImageIcon(adultScaled), SwingConstants.LEFT);
         adult.setIconTextGap(5);
@@ -302,7 +303,7 @@ public class reservepage extends JFrame implements ActionListener {
         add(fld14);
 
         
-        ImageIcon childIconRaw = new ImageIcon(getClass().getResource("childrens.png"));
+        ImageIcon childIconRaw = new ImageIcon(getClass().getResource("/hotel/reservation/system/resources/childrens.png"));
         Image childScaled = childIconRaw.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         child = new JLabel("NUMBER OF CHILDREN", new ImageIcon(childScaled), SwingConstants.LEFT);
         child.setIconTextGap(5);
@@ -315,7 +316,7 @@ public class reservepage extends JFrame implements ActionListener {
         add(fld15);
 
         
-        ImageIcon specialIconRaw = new ImageIcon(getClass().getResource("instructions.png")); 
+        ImageIcon specialIconRaw = new ImageIcon(getClass().getResource("/hotel/reservation/system/resources/instructions.png")); 
         Image specialScaled = specialIconRaw.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         x = new JLabel("SPECIAL INSTRUCTIONS", new ImageIcon(specialScaled), SwingConstants.LEFT);
         x.setIconTextGap(5);
