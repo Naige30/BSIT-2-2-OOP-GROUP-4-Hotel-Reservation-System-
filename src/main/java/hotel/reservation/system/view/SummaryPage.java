@@ -77,6 +77,7 @@ public class SummaryPage extends JFrame implements ActionListener {
         notesArea.setEditable(false);
         notesArea.setMargin(new Insets(8, 8, 8, 8));
         notesArea.setBackground(new Color(250, 250, 250));
+        notesArea.setFocusable(false);
         
         scroll = new JScrollPane(notesArea);
         scroll.setBorder(new LineBorder(new Color(230, 230, 230)));
