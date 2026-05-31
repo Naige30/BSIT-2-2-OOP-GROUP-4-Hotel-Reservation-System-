@@ -30,8 +30,8 @@ public class loginpage extends JFrame implements ActionListener {
         setLocationRelativeTo(null);
         
         
-        setIconImage(new ImageIcon(getClass().getResource("/hotel/reservation/system/resources/logo.png")).getImage());
-        originalIcon = new ImageIcon(getClass().getResource("/hotel/reservation/system/resources/hotel.jpg"));
+        setIconImage(new ImageIcon(getClass().getResource("/logo.png")).getImage());
+        originalIcon = new ImageIcon(getClass().getResource("/hotel.jpg"));
         Image img = originalIcon.getImage();
         
 
@@ -114,7 +114,7 @@ public class loginpage extends JFrame implements ActionListener {
         add(signup);
         signup.addActionListener(this);
         
-        ImageIcon pinIconRaw = new ImageIcon(getClass().getResource("/hotel/reservation/system/resources/pin.png"));
+        ImageIcon pinIconRaw = new ImageIcon(getClass().getResource("/pin.png"));
         Image pinScaled = pinIconRaw.getImage().getScaledInstance(22, 22, Image.SCALE_SMOOTH);
         ImageIcon pinIcon = new ImageIcon(pinScaled);
         

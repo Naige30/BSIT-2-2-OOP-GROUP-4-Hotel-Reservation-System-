@@ -25,7 +25,7 @@ public class signup extends JFrame implements ActionListener {
         setLocationRelativeTo(null);
         setResizable(false);
 
-        setIconImage(new ImageIcon(getClass().getResource("/hotel/reservation/system/resources/logo.png")).getImage());
+        setIconImage(new ImageIcon(getClass().getResource("/logo.png")).getImage());
         
         titlelbl = new JLabel("Sign Up",SwingConstants.CENTER);
         titlelbl.setFont(new Font("Serif", Font.BOLD, 36));
@@ -91,10 +91,6 @@ public class signup extends JFrame implements ActionListener {
         add(submitbtn);
         submitbtn.addActionListener(this);
 
-        
-//        footer = new JLabel("Already have an account? Log in", SwingConstants.CENTER);
-//        footer.setBounds(0, 540, 400, 20);
-//        add(footer);
 
         numberlbl=new JLabel("Contact No.");
         numberlbl.setBounds(40, 340, 100, 20);

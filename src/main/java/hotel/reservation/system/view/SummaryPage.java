@@ -32,7 +32,7 @@ public class SummaryPage extends JFrame implements ActionListener {
         getContentPane().setBackground(Color.WHITE);
         setLocationRelativeTo(null);
         setResizable(false);
-        setIconImage(new ImageIcon(getClass().getResource("/hotel/reservation/system/resources/logo.png")).getImage());
+        setIconImage(new ImageIcon(getClass().getResource("/logo.png")).getImage());
 
         int y = 110;
         

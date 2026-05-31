@@ -23,7 +23,7 @@ public class payment extends JFrame implements ActionListener {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
-        setIconImage(new ImageIcon(getClass().getResource("/hotel/reservation/system/resources/logo.png")).getImage());
+        setIconImage(new ImageIcon(getClass().getResource("/logo.png")).getImage());
 
         getContentPane().setBackground(new Color(245, 245, 245));
 
@@ -53,10 +53,10 @@ public class payment extends JFrame implements ActionListener {
         pmLabel.setBounds(10, 10, 150, 40);
         paymentBox.add(pmLabel);
 
-        paymentBox.add(createIcon("/hotel/reservation/system/resources/mastercard.png", 140));
-        paymentBox.add(createIcon("/hotel/reservation/system/resources/visa.png", 180));
-        paymentBox.add(createIcon("/hotel/reservation/system/resources/americanexpress.png", 220));
-        paymentBox.add(createIcon("/hotel/reservation/system/resources/applepay.png", 260));
+        paymentBox.add(createIcon("/mastercard.png", 140));
+        paymentBox.add(createIcon("/visa.png", 180));
+        paymentBox.add(createIcon("/americanexpress.png", 220));
+        paymentBox.add(createIcon("/applepay.png", 260));
 
 
         panel.add(createLabel("Account Holder Name", 15, 95));

@@ -1,4 +1,4 @@
-package hotel.reservation.system;
+ package hotel.reservation.system;
 import hotel.reservation.system.view.loginpage;
 
 public class HOTELRESERVATIONSYSTEM {

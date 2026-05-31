@@ -23,10 +23,10 @@ public class casalacao extends JFrame implements ActionListener {
         setLocationRelativeTo(null);
         getContentPane().setBackground(Color.WHITE);
         setTitle("Giovanni Madrigal Grand Hotel: A Hotel Reservation System");
-        setIconImage(new ImageIcon(getClass().getResource("/hotel/reservation/system/resources/logo.png")).getImage());
+        setIconImage(new ImageIcon(getClass().getResource("/logo.png")).getImage());
 
         
-        ImageIcon sparkleRaw = new ImageIcon(getClass().getResource("/hotel/reservation/system/resources/sparkle.png"));
+        ImageIcon sparkleRaw = new ImageIcon(getClass().getResource("/sparkle.png"));
         Image sparkleScaled = sparkleRaw.getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH);
         sparkleIcon = new ImageIcon(sparkleScaled);
 
@@ -59,21 +59,21 @@ public class casalacao extends JFrame implements ActionListener {
         add(line);
 
         
-        ImageIcon rawImg1 = new ImageIcon(getClass().getResource("/hotel/reservation/system/resources/casalacao1.jpg"));
+        ImageIcon rawImg1 = new ImageIcon(getClass().getResource("/casalacao1.jpg"));
         Image scaledImg1 = rawImg1.getImage().getScaledInstance(300, 230, Image.SCALE_SMOOTH);
         img1 = new JLabel(new ImageIcon(scaledImg1));
         img1.setBounds(40, 160, 300, 230);
         add(img1);
 
         
-        ImageIcon rawImg2 = new ImageIcon(getClass().getResource("/hotel/reservation/system/resources/casalacao2.jpg"));
+        ImageIcon rawImg2 = new ImageIcon(getClass().getResource("/casalacao2.jpg"));
         Image scaledImg2 = rawImg2.getImage().getScaledInstance(300, 230, Image.SCALE_SMOOTH);
         img2 = new JLabel(new ImageIcon(scaledImg2));
         img2.setBounds(350, 160, 300, 230);
         add(img2);
 
         
-        ImageIcon rawImg3 = new ImageIcon(getClass().getResource("/hotel/reservation/system/resources/casalacao3.jpg"));
+        ImageIcon rawImg3 = new ImageIcon(getClass().getResource("/casalacao3.jpg"));
         Image scaledImg3 = rawImg3.getImage().getScaledInstance(300, 230, Image.SCALE_SMOOTH);
         img3 = new JLabel(new ImageIcon(scaledImg3));
         img3.setBounds(660, 160, 300, 230);
@@ -93,7 +93,7 @@ public class casalacao extends JFrame implements ActionListener {
         add(fullDescription);
 
 
-        ImageIcon bedRaw = new ImageIcon(getClass().getResource("/hotel/reservation/system/resources/roompref.png"));
+        ImageIcon bedRaw = new ImageIcon(getClass().getResource("/roompref.png"));
         Image bedScaled = bedRaw.getImage().getScaledInstance(26, 26, Image.SCALE_SMOOTH);
         bedLabel = new JLabel("BED CONFIGURATION");
         bedLabel.setIcon(new ImageIcon(bedScaled));
@@ -109,7 +109,7 @@ public class casalacao extends JFrame implements ActionListener {
         bedDesc.setBounds(55, 540 + 32, 300, 20);
         add(bedDesc);
 
-        ImageIcon sizeRaw = new ImageIcon(getClass().getResource("/hotel/reservation/system/resources/roomsize.png"));
+        ImageIcon sizeRaw = new ImageIcon(getClass().getResource("/roomsize.png"));
         Image sizeScaled = sizeRaw.getImage().getScaledInstance(26, 26, Image.SCALE_SMOOTH);
         sizeLabel = new JLabel("ROOM SIZE");
         sizeLabel.setIcon(new ImageIcon(sizeScaled));
@@ -125,7 +125,7 @@ public class casalacao extends JFrame implements ActionListener {
         sizeDesc.setBounds(55, 540 + 102, 300, 20);
         add(sizeDesc);
 
-        ImageIcon occRaw = new ImageIcon(getClass().getResource("/hotel/reservation/system/resources/occupancy.png"));
+        ImageIcon occRaw = new ImageIcon(getClass().getResource("/occupancy.png"));
         Image occScaled = occRaw.getImage().getScaledInstance(26, 26, Image.SCALE_SMOOTH);
         occLabel = new JLabel("OCCUPANCY");
         occLabel.setIcon(new ImageIcon(occScaled));
@@ -141,7 +141,7 @@ public class casalacao extends JFrame implements ActionListener {
         occDesc.setBounds(55, 540 + 172, 300, 20);
         add(occDesc);
 
-        ImageIcon viewRaw = new ImageIcon(getClass().getResource("/hotel/reservation/system/resources/view.png"));
+        ImageIcon viewRaw = new ImageIcon(getClass().getResource("/view.png"));
         Image viewScaled = viewRaw.getImage().getScaledInstance(26, 26, Image.SCALE_SMOOTH);
         viewLabel = new JLabel("VIEW");
         viewLabel.setIcon(new ImageIcon(viewScaled));
@@ -158,7 +158,7 @@ public class casalacao extends JFrame implements ActionListener {
         add(viewDesc);
 
         
-        ImageIcon amenRaw = new ImageIcon(getClass().getResource("/hotel/reservation/system/resources/amenities.png"));
+        ImageIcon amenRaw = new ImageIcon(getClass().getResource("/amenities.png"));
         Image amenScaled = amenRaw.getImage().getScaledInstance(26, 26, Image.SCALE_SMOOTH);
         lblAmenities = new JLabel("PREMIUM AMENITIES");
         lblAmenities.setIcon(new ImageIcon(amenScaled));
@@ -187,7 +187,7 @@ public class casalacao extends JFrame implements ActionListener {
         }
 
         
-        ImageIcon bathRaw = new ImageIcon(getClass().getResource("/hotel/reservation/system/resources/bathroom.png"));
+        ImageIcon bathRaw = new ImageIcon(getClass().getResource("/bathroom.png"));
         Image bathScaled = bathRaw.getImage().getScaledInstance(26, 26, Image.SCALE_SMOOTH);
         lblBathroom = new JLabel("BATHROOM");
         lblBathroom.setIcon(new ImageIcon(bathScaled));
