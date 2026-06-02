@@ -205,16 +205,31 @@ public class cancelpage extends JFrame implements ActionListener {
             dispose();
             new hotelmenu().setVisible(true);
         } else if (e.getSource() == btnCancel) {
-            if (table.getSelectedRow() == -1) {
+            int selectedRow = table.getSelectedRow();
+            
+            if (selectedRow == -1) {
                 JOptionPane.showMessageDialog(this, "Please select a reservation to cancel.", "Selection Required", JOptionPane.WARNING_MESSAGE);
                 return;
             }
+            
             int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to cancel this reservation?", "Confirm Cancellation", JOptionPane.YES_NO_OPTION);
             if (confirm == JOptionPane.YES_OPTION) {
+                // 1. Get the Room ID from column index 0 of the selected row
+                int selectedRoomId = (int) table.getValueAt(selectedRow, 0);
+                
+                // 2. Find and remove the room from the backend ArrayList using its ID
+                rooms.removeIf(room -> room.id == selectedRoomId);
+                
+                // 3. Inform the user and refresh the UI layout
                 JOptionPane.showMessageDialog(this, "Reservation Cancelled Successfully!");
-                dispose();
-                new hotelmenu().setVisible(true);
-            }
+                
+                // Refresh the table with the remaining items
+                showTable(rooms);
+                
+                // Reset search bar behavior
+                txtSearch.setText("Search reserved room type...");
+                txtSearch.setForeground(Color.GRAY);
         }
+    }
     }
 }
