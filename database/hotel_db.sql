@@ -18,14 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `hotel_db`
---
 
--- --------------------------------------------------------
-
---
--- Table structure for table `rooms`
---
 
 CREATE TABLE `rooms` (
   `id` int(11) NOT NULL,
@@ -36,9 +29,7 @@ CREATE TABLE `rooms` (
   `user_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `rooms`
---
+
 
 INSERT INTO `rooms` (`id`, `room_number`, `room_type`, `price`, `status`, `user_id`) VALUES
 (1, '101', 'Palazzo Arzola', 2500, 'Reserved', 2),
@@ -61,11 +52,7 @@ INSERT INTO `rooms` (`id`, `room_number`, `room_type`, `price`, `status`, `user_
 (28, '403', 'Grande Aviles', 3000, 'Available', NULL),
 (29, '404', 'Grande Aviles', 3000, 'Available', NULL);
 
--- --------------------------------------------------------
 
---
--- Table structure for table `users`
---
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
@@ -77,60 +64,34 @@ CREATE TABLE `users` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `users`
---
+
 
 INSERT INTO `users` (`id`, `username`, `password`, `email`, `contact_number`, `birthdate`, `created_at`) VALUES
 (1, 'admin', 'admin123', 'admin@madrigal.com', '09123456789', '2006-04-18', '2026-06-02 08:59:56'),
 (2, 'sophia', '12345678', '123', '123', '2006-04-18', '2026-06-02 09:03:07');
 
---
--- Indexes for dumped tables
---
 
---
--- Indexes for table `rooms`
---
 ALTER TABLE `rooms`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `room_number` (`room_number`),
   ADD KEY `user_id` (`user_id`);
 
---
--- Indexes for table `users`
---
+
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `username` (`username`);
 
---
--- AUTO_INCREMENT for dumped tables
---
 
---
--- AUTO_INCREMENT for table `rooms`
---
 ALTER TABLE `rooms`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
---
--- AUTO_INCREMENT for table `users`
---
+
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
---
--- Constraints for dumped tables
---
 
---
--- Constraints for table `rooms`
---
 ALTER TABLE `rooms`
   ADD CONSTRAINT `rooms_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE SET NULL;
 COMMIT;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
