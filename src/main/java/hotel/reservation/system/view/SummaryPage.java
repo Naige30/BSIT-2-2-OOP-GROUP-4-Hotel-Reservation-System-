@@ -1,10 +1,15 @@
 package hotel.reservation.system.view;
+
 import hotel.reservation.system.model.Room;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.border.LineBorder;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class SummaryPage extends JFrame implements ActionListener {
     
@@ -58,7 +63,6 @@ public class SummaryPage extends JFrame implements ActionListener {
         separator.setForeground(new Color(230, 230, 230));
         add(separator);
 
-  
         String fullAddress = add1 + (city.isEmpty() ? "" : ", " + city) + 
                              (state.isEmpty() ? "" : ", " + state) + 
                              (zip.isEmpty() ? "" : " " + zip);
@@ -71,7 +75,6 @@ public class SummaryPage extends JFrame implements ActionListener {
 
         addRow("Check-in:", indate + " at " + intime, y); y += 40;
         addRow("Check-out:", outdate + " at " + outtime, y); y += 40;
-        
         
         String roomDisplay = (roomNumberField != null && !roomNumberField.isEmpty())
                 ? roomPref + " [Room " + roomNumberField + "]"
@@ -144,11 +147,34 @@ public class SummaryPage extends JFrame implements ActionListener {
         add(line);
     }
 
+  
+    private void releaseRoomReservation(String roomNumber) {
+        if (roomNumber == null || roomNumber.trim().isEmpty()) {
+            return;
+        }
+
+        String dbUrl = "jdbc:mysql://localhost:3306/hotel_db";
+        String dbUser = "root";
+        String dbPass = "";
+        
+        String query = "UPDATE rooms SET status = 'Available', user_id = NULL WHERE room_number = ?";
+
+        try (Connection conn = DriverManager.getConnection(dbUrl, dbUser, dbPass);
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            
+            stmt.setString(1, roomNumber.trim());
+            stmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
-     if (e.getSource() == done) {
-    this.dispose();
-    new payment(roomTypeField, roomNumberField).setVisible(true);
+        if (e.getSource() == done) {
+            this.dispose();
+            new payment(roomTypeField, roomNumberField).setVisible(true);
 
         } else if (e.getSource() == cancel) {
             int response = JOptionPane.showConfirmDialog(this, 
@@ -157,6 +183,10 @@ public class SummaryPage extends JFrame implements ActionListener {
                 JOptionPane.YES_NO_OPTION);
             
             if (response == JOptionPane.YES_OPTION) {
+                
+                releaseRoomReservation(this.roomNumberField);
+                
+                JOptionPane.showMessageDialog(this, "Reservation canceled. Room " + roomNumberField + " is now vacant.");
                 this.dispose();
                 new hotelmenu().setVisible(true);
             }
