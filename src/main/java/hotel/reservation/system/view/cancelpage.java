@@ -1,6 +1,7 @@
 package hotel.reservation.system.view;
-import hotel.reservation.system.model.Room; 
 
+import hotel.reservation.system.model.Room; 
+import hotel.reservation.system.model.Session; 
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -10,14 +11,19 @@ import javax.swing.border.MatteBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
-
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class cancelpage extends JFrame implements ActionListener {
     private final JTextField txtSearch;
     private final JButton btnSearch, btnShowAll, btnCancel, btnBack;
     private JTable table;
     private DefaultTableModel model;
-    private final ArrayList<Room> rooms = new ArrayList<>();
+    private ArrayList<Room> rooms = new ArrayList<>();
+    private final String PLACEHOLDER = "Search reserved room type...";
 
     public cancelpage() {
         setTitle("Giovanni Madrigal Grand Hotel: Cancel Reservation");
@@ -26,10 +32,8 @@ public class cancelpage extends JFrame implements ActionListener {
         getContentPane().setBackground(Color.WHITE);
         setLocationRelativeTo(null);
         setResizable(false);
-        setTitle("Giovanni Madrigal Grand Hotel | Cancel Page");
         
         setIconImage(new ImageIcon(getClass().getResource("/logo.png")).getImage());
-
 
         JPanel mainPanel = new JPanel(new GridBagLayout());
         mainPanel.setBackground(Color.WHITE);
@@ -38,16 +42,17 @@ public class cancelpage extends JFrame implements ActionListener {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(10, 5, 10, 5);
 
-        JLabel lblTitle = new JLabel("CANCEL RESERVATION");
+        JLabel lblTitle = new JLabel("MY RESERVATIONS (" + Session.currentUsername.toUpperCase() + ")");
         lblTitle.setFont(new Font("Inter", Font.BOLD, 26));
         lblTitle.setForeground(new Color(30, 30, 30));
         gbc.gridx = 0; gbc.gridy = 0; gbc.gridwidth = 3;
         mainPanel.add(lblTitle, gbc);
 
-        txtSearch = new JTextField("Search reserved room type...");
+        txtSearch = new JTextField(PLACEHOLDER);
         txtSearch.setFont(new Font("SansSerif", Font.PLAIN, 15));
+        txtSearch.setForeground(Color.GRAY);
         txtSearch.setBorder(new MatteBorder(0, 0, 1, 0, Color.LIGHT_GRAY));
-        addPlaceholderBehavior(txtSearch, "Search reserved room type...");
+        addPlaceholderBehavior(txtSearch, PLACEHOLDER);
         
         gbc.gridy = 1; gbc.gridwidth = 1; gbc.weightx = 1.0;
         mainPanel.add(txtSearch, gbc);
@@ -94,7 +99,7 @@ public class cancelpage extends JFrame implements ActionListener {
         mainPanel.add(footerPanel, gbc);
 
         add(mainPanel);
-        loadRooms();
+        loadReservedRooms(); 
         showTable(rooms);
     }
 
@@ -105,20 +110,20 @@ public class cancelpage extends JFrame implements ActionListener {
         };
         table = new JTable(model);
         model.addColumn("ID");
+        model.addColumn("ROOM NUMBER"); 
         model.addColumn("ROOM TYPE");
-        model.addColumn("PRICE");
+        model.addColumn("PRICE (PHP)");
         model.addColumn("STATUS");
 
-        
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         table.getColumnModel().getColumn(0).setPreferredWidth(60);   
-        table.getColumnModel().getColumn(1).setPreferredWidth(380);  
-        table.getColumnModel().getColumn(2).setPreferredWidth(180);  
-        table.getColumnModel().getColumn(3).setPreferredWidth(188);  
+        table.getColumnModel().getColumn(1).setPreferredWidth(120);  
+        table.getColumnModel().getColumn(2).setPreferredWidth(300);  
+        table.getColumnModel().getColumn(3).setPreferredWidth(150);  
+        table.getColumnModel().getColumn(4).setPreferredWidth(178);  
         table.getTableHeader().setReorderingAllowed(false);
         table.getTableHeader().setResizingAllowed(false);
 
-        
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
         for (int i = 0; i < table.getColumnCount(); i++) {
@@ -156,14 +161,14 @@ public class cancelpage extends JFrame implements ActionListener {
         field.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
-                if (field.getText().equals(placeholder)) {
+                if (field.getText().equals(placeholder) && field.getForeground().equals(Color.GRAY)) {
                     field.setText("");
                     field.setForeground(Color.BLACK);
                 }
             }
             @Override
             public void focusLost(FocusEvent e) {
-                if (field.getText().isEmpty()) {
+                if (field.getText().trim().isEmpty()) {
                     field.setForeground(Color.GRAY);
                     field.setText(placeholder);
                 }
@@ -171,25 +176,70 @@ public class cancelpage extends JFrame implements ActionListener {
         });
     }
 
-    public void loadRooms() {
-        rooms.add(new Room(1, "Palazzo Arzola", 2500, "Reserved"));
-        rooms.add(new Room(2, "Tuazon Deluxe", 1500, "Reserved"));
-        rooms.add(new Room(3, "Casa Lacao", 4000, "Reserved"));
-        rooms.add(new Room(4, "Grande Aviles", 3000, "Reserved"));
+    public void loadReservedRooms() {
+        rooms.clear();
+        String dbUrl = "jdbc:mysql://localhost:3306/hotel_db";
+        String dbUser = "root";
+        String dbPass = "";
+        String query = "SELECT * FROM rooms WHERE status = 'Reserved' AND user_id = ?";
+
+        try (Connection conn = DriverManager.getConnection(dbUrl, dbUser, dbPass);
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            
+            stmt.setInt(1, Session.currentUserId);
+            
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    rooms.add(new Room(
+                        rs.getInt("id"),
+                        rs.getString("room_number"),
+                        rs.getString("room_type"),
+                        rs.getDouble("price"),
+                        rs.getString("status")
+                    ));
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error fetching account reservations.", "Database Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     public void showTable(ArrayList<Room> list) {
         model.setRowCount(0);
         for (Room r : list) {
-            model.addRow(new Object[]{r.id, r.type, r.price, r.status});
+            model.addRow(new Object[]{r.id, r.roomNumber, r.type, r.price, r.status});
+        }
+    }
+
+    private boolean cancelRoomReservationInDatabase(int roomId) {
+        String dbUrl = "jdbc:mysql://localhost:3306/hotel_db";
+        String dbUser = "root";
+        String dbPass = "";
+        String query = "UPDATE rooms SET status = 'Available', user_id = NULL WHERE id = ?";
+
+        try (Connection conn = DriverManager.getConnection(dbUrl, dbUser, dbPass);
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            
+            stmt.setInt(1, roomId);
+            return stmt.executeUpdate() > 0;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
         }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == btnSearch) {
-            String keyword = txtSearch.getText().toLowerCase();
-            if (keyword.equals("search reserved room type...")) return;
+            if (txtSearch.getForeground().equals(Color.GRAY)) return;
+            
+            String keyword = txtSearch.getText().toLowerCase().trim();
+            if (keyword.isEmpty()) return;
+            
+            loadReservedRooms();
+            
             ArrayList<Room> result = new ArrayList<>();
             for (Room r : rooms) {
                 if (r.type.toLowerCase().contains(keyword)) {
@@ -198,23 +248,36 @@ public class cancelpage extends JFrame implements ActionListener {
             }
             showTable(result);
         } else if (e.getSource() == btnShowAll) {
+            loadReservedRooms();
             showTable(rooms);
-            txtSearch.setText("Search reserved room type...");
+            txtSearch.setText(PLACEHOLDER);
             txtSearch.setForeground(Color.GRAY);
         } else if (e.getSource() == btnBack) {
             dispose();
             new hotelmenu().setVisible(true);
         } else if (e.getSource() == btnCancel) {
-            if (table.getSelectedRow() == -1) {
+            int selectedRow = table.getSelectedRow();
+            
+            if (selectedRow == -1) {
                 JOptionPane.showMessageDialog(this, "Please select a reservation to cancel.", "Selection Required", JOptionPane.WARNING_MESSAGE);
                 return;
             }
+            
             int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to cancel this reservation?", "Confirm Cancellation", JOptionPane.YES_NO_OPTION);
             if (confirm == JOptionPane.YES_OPTION) {
-                JOptionPane.showMessageDialog(this, "Reservation Cancelled Successfully!");
-                dispose();
-                new hotelmenu().setVisible(true);
-            }
+                int modelRow = table.convertRowIndexToModel(selectedRow);
+                int selectedRoomId = (int) table.getModel().getValueAt(modelRow, 0);
+                
+                if (cancelRoomReservationInDatabase(selectedRoomId)) {
+                    JOptionPane.showMessageDialog(this, "Reservation Cancelled Successfully! Room is now Available.");
+                    loadReservedRooms(); 
+                    showTable(rooms);
+                    txtSearch.setText(PLACEHOLDER);
+                    txtSearch.setForeground(Color.GRAY);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Database Error: Could not cancel reservation.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } 
         }
     }
 }

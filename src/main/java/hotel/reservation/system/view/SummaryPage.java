@@ -1,10 +1,15 @@
 package hotel.reservation.system.view;
+
 import hotel.reservation.system.model.Room;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.border.LineBorder;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class SummaryPage extends JFrame implements ActionListener {
     
@@ -13,8 +18,11 @@ public class SummaryPage extends JFrame implements ActionListener {
     JSeparator separator;
     JTextArea notesArea;
     JScrollPane scroll;
+    
+    private String roomTypeField;
+    private String roomNumberField; 
 
- public   SummaryPage(
+    public SummaryPage(
         String fname, String lname,
         String add1, String add2,
         String city, String state, String zip,
@@ -25,6 +33,9 @@ public class SummaryPage extends JFrame implements ActionListener {
         String adults, String children,
         String notes
     ) {
+        
+        this.roomTypeField = roomPref;
+        this.roomNumberField = add2; 
         
         setTitle("Reservation Summary");
         setSize(750, 650);
@@ -52,16 +63,24 @@ public class SummaryPage extends JFrame implements ActionListener {
         separator.setForeground(new Color(230, 230, 230));
         add(separator);
 
-        
+        String fullAddress = add1 + (city.isEmpty() ? "" : ", " + city) + 
+                             (state.isEmpty() ? "" : ", " + state) + 
+                             (zip.isEmpty() ? "" : " " + zip);
+
         addRow("Guest Identity:", fname + " " + lname, y); y += 40;
-        addRow("Residence:", add1 + ", " + add2 + ", " + city + ", " + state + " " + zip, y); y += 40;
+        addRow("Residence:", fullAddress, y); y += 40;
         addRow("Contact:", email + " | " + phone, y); y += 40;
         
         y += 10; 
 
         addRow("Check-in:", indate + " at " + intime, y); y += 40;
         addRow("Check-out:", outdate + " at " + outtime, y); y += 40;
-        addRow("Accommodation:", roomPref + " (" + adults + " Adults, " + children + " Children)", y); y += 45;
+        
+        String roomDisplay = (roomNumberField != null && !roomNumberField.isEmpty())
+                ? roomPref + " [Room " + roomNumberField + "]"
+                : roomPref;
+
+        addRow("Accommodation:", roomDisplay + " (" + adults + " Adults, " + children + " Children)", y); y += 45;
 
         reqLbl = new JLabel("Special Requests:");
         reqLbl.setFont(new Font("Segoe UI", Font.BOLD, 14));
@@ -77,6 +96,7 @@ public class SummaryPage extends JFrame implements ActionListener {
         notesArea.setEditable(false);
         notesArea.setMargin(new Insets(8, 8, 8, 8));
         notesArea.setBackground(new Color(250, 250, 250));
+        notesArea.setFocusable(false);
         
         scroll = new JScrollPane(notesArea);
         scroll.setBorder(new LineBorder(new Color(230, 230, 230)));
@@ -84,7 +104,6 @@ public class SummaryPage extends JFrame implements ActionListener {
         add(scroll);
         y += 100;
 
-        
         cancel = new JButton("Cancel Reservation");
         cancel.setBackground(new Color(245, 245, 245)); 
         cancel.setForeground(Color.DARK_GRAY);
@@ -109,7 +128,6 @@ public class SummaryPage extends JFrame implements ActionListener {
         setVisible(true);
     }
 
-    
     private void addRow(String header, String data, int y) {
         JLabel headerLbl = new JLabel(header);
         headerLbl.setFont(new Font("Segoe UI", Font.BOLD, 14));
@@ -123,18 +141,41 @@ public class SummaryPage extends JFrame implements ActionListener {
         dataLbl.setBounds(215, y, 460, 25);
         add(dataLbl);
         
-        
         JSeparator line = new JSeparator();
         line.setBounds(75, y + 30, 600, 1);
         line.setForeground(new Color(245, 245, 245));
         add(line);
     }
 
+  
+    private void releaseRoomReservation(String roomNumber) {
+        if (roomNumber == null || roomNumber.trim().isEmpty()) {
+            return;
+        }
+
+        String dbUrl = "jdbc:mysql://localhost:3306/hotel_db";
+        String dbUser = "root";
+        String dbPass = "";
+        
+        String query = "UPDATE rooms SET status = 'Available', user_id = NULL WHERE room_number = ?";
+
+        try (Connection conn = DriverManager.getConnection(dbUrl, dbUser, dbPass);
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            
+            stmt.setString(1, roomNumber.trim());
+            stmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == done) {
             this.dispose();
-            new payment().setVisible(true);
+            new payment(roomTypeField, roomNumberField).setVisible(true);
+
         } else if (e.getSource() == cancel) {
             int response = JOptionPane.showConfirmDialog(this, 
                 "Are you sure you want to cancel your reservation?", 
@@ -142,6 +183,10 @@ public class SummaryPage extends JFrame implements ActionListener {
                 JOptionPane.YES_NO_OPTION);
             
             if (response == JOptionPane.YES_OPTION) {
+                
+                releaseRoomReservation(this.roomNumberField);
+                
+                JOptionPane.showMessageDialog(this, "Reservation canceled. Room " + roomNumberField + " is now vacant.");
                 this.dispose();
                 new hotelmenu().setVisible(true);
             }

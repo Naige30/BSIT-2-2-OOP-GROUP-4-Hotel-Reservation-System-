@@ -16,7 +16,7 @@ public class searchpage extends JFrame implements ActionListener {
     private final JButton btnSearch, btnShowAll, btnReserve, btnBack;
     private JTable table;
     private DefaultTableModel model;
-    private final ArrayList<Room> rooms = new ArrayList<>();
+    private final String PLACEHOLDER = "Search room type or status...";
 
     public searchpage() {
         setTitle("Giovanni Madrigal Grand Hotel: Search");
@@ -25,7 +25,6 @@ public class searchpage extends JFrame implements ActionListener {
         getContentPane().setBackground(Color.WHITE);
         setLocationRelativeTo(null);
         setResizable(false);
-        setTitle("Giovanni Madrigal Grand Hotel | Search Page");
         
         setIconImage(new ImageIcon(getClass().getResource("/logo.png")).getImage());
 
@@ -42,10 +41,11 @@ public class searchpage extends JFrame implements ActionListener {
         gbc.gridx = 0; gbc.gridy = 0; gbc.gridwidth = 3;
         mainPanel.add(lblTitle, gbc);
 
-        txtSearch = new JTextField("Search room type or status...");
+        txtSearch = new JTextField(PLACEHOLDER);
         txtSearch.setFont(new Font("SansSerif", Font.PLAIN, 15));
+        txtSearch.setForeground(Color.GRAY);
         txtSearch.setBorder(new MatteBorder(0, 0, 1, 0, Color.LIGHT_GRAY));
-        addPlaceholderBehavior(txtSearch, "Search room type or status...");
+        addPlaceholderBehavior(txtSearch, PLACEHOLDER);
         
         gbc.gridy = 1; gbc.gridwidth = 1; gbc.weightx = 1.0;
         mainPanel.add(txtSearch, gbc);
@@ -92,8 +92,7 @@ public class searchpage extends JFrame implements ActionListener {
         mainPanel.add(footerPanel, gbc);
 
         add(mainPanel);
-        loadRooms();
-        showTable(rooms);
+        showTable(Room.getAllRooms());
     }
 
     private void setupTable() {
@@ -103,15 +102,17 @@ public class searchpage extends JFrame implements ActionListener {
         };
         table = new JTable(model);
         model.addColumn("ID");
+        model.addColumn("ROOM NUMBER");
         model.addColumn("ROOM TYPE");
         model.addColumn("PRICE (PHP)");
         model.addColumn("STATUS");
 
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         table.getColumnModel().getColumn(0).setPreferredWidth(60);   
-        table.getColumnModel().getColumn(1).setPreferredWidth(380);  
-        table.getColumnModel().getColumn(2).setPreferredWidth(180);  
-        table.getColumnModel().getColumn(3).setPreferredWidth(188);  
+        table.getColumnModel().getColumn(1).setPreferredWidth(120);  
+        table.getColumnModel().getColumn(2).setPreferredWidth(300);   
+        table.getColumnModel().getColumn(3).setPreferredWidth(150);  
+        table.getColumnModel().getColumn(4).setPreferredWidth(178);  
         table.getTableHeader().setReorderingAllowed(false);
         table.getTableHeader().setResizingAllowed(false);
 
@@ -154,14 +155,14 @@ public class searchpage extends JFrame implements ActionListener {
         field.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
-                if (field.getText().equals(placeholder)) {
+                if (field.getText().equals(placeholder) && field.getForeground().equals(Color.GRAY)) {
                     field.setText("");
                     field.setForeground(Color.BLACK);
                 }
             }
             @Override
             public void focusLost(FocusEvent e) {
-                if (field.getText().isEmpty()) {
+                if (field.getText().trim().isEmpty()) {
                     field.setForeground(Color.GRAY);
                     field.setText(placeholder);
                 }
@@ -169,46 +170,53 @@ public class searchpage extends JFrame implements ActionListener {
         });
     }
 
-    public void loadRooms() {
-        rooms.add(new Room(1, "Tuazon Deluxe", 2500, "Available"));
-        rooms.add(new Room(2, "Palazzo Arzola", 1500, "Occupied"));
-        rooms.add(new Room(3, "Casa Lacao", 4000, "Available"));
-        rooms.add(new Room(4, "Grande Aviles", 3000, "Maintenance"));
-    }
-
     public void showTable(ArrayList<Room> list) {
         model.setRowCount(0);
         for (Room r : list) {
-            model.addRow(new Object[]{r.id, r.type, r.price, r.status});
+            model.addRow(new Object[]{r.id, r.roomNumber, r.type, r.price, r.status});
         }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == btnSearch) {
-            String keyword = txtSearch.getText().toLowerCase();
-            if (keyword.equals("search room type or status...")) return;
+            if (txtSearch.getForeground().equals(Color.GRAY)) return;
+            
+            String keyword = txtSearch.getText().toLowerCase().trim();
             ArrayList<Room> result = new ArrayList<>();
-            for (Room r : rooms) {
+ 
+            for (Room r : Room.getAllRooms()) {
                 if (r.type.toLowerCase().contains(keyword) || r.status.toLowerCase().contains(keyword)) {
                     result.add(r);
                 }
             }
             showTable(result);
         } else if (e.getSource() == btnShowAll) {
-            showTable(rooms);
-            txtSearch.setText("Search room type or status...");
+            showTable(Room.getAllRooms());
+            txtSearch.setText(PLACEHOLDER);
             txtSearch.setForeground(Color.GRAY);
         } else if (e.getSource() == btnBack) {
             dispose();
             new hotelmenu().setVisible(true);
-        } else if (e.getSource() == btnReserve) {
-            if (table.getSelectedRow() == -1) {
-                JOptionPane.showMessageDialog(this, "Please select a room.", "Selection Required", JOptionPane.WARNING_MESSAGE);
+        } else if (e.getSource() == btnReserve) { 
+            int selectedRow = table.getSelectedRow();
+            if (selectedRow == -1) {
+                JOptionPane.showMessageDialog(this, "Please select a room from the catalog table.", "Selection Required", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            int modelRow = table.convertRowIndexToModel(selectedRow);
+            
+            String selectedRoomNumber = table.getModel().getValueAt(modelRow, 1).toString();
+            String selectedRoomType = table.getModel().getValueAt(modelRow, 2).toString();
+            String selectedStatus = table.getModel().getValueAt(modelRow, 4).toString();
+
+            if (selectedStatus.equalsIgnoreCase("Reserved")) {
+                JOptionPane.showMessageDialog(this, "This specific room is already reserved! Please select an available room.", "Room Unavailable", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             dispose();
-            new reservepage().setVisible(true);
+            new reservepage(selectedRoomType, selectedRoomNumber).setVisible(true);
         }
     }
 }
