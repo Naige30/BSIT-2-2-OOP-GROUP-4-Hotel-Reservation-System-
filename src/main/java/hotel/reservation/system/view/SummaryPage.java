@@ -13,8 +13,11 @@ public class SummaryPage extends JFrame implements ActionListener {
     JSeparator separator;
     JTextArea notesArea;
     JScrollPane scroll;
+    
+    private String roomTypeField;
+    private String roomNumberField; 
 
- public   SummaryPage(
+    public SummaryPage(
         String fname, String lname,
         String add1, String add2,
         String city, String state, String zip,
@@ -25,6 +28,9 @@ public class SummaryPage extends JFrame implements ActionListener {
         String adults, String children,
         String notes
     ) {
+        
+        this.roomTypeField = roomPref;
+        this.roomNumberField = add2; 
         
         setTitle("Reservation Summary");
         setSize(750, 650);
@@ -52,16 +58,26 @@ public class SummaryPage extends JFrame implements ActionListener {
         separator.setForeground(new Color(230, 230, 230));
         add(separator);
 
-        
+  
+        String fullAddress = add1 + (city.isEmpty() ? "" : ", " + city) + 
+                             (state.isEmpty() ? "" : ", " + state) + 
+                             (zip.isEmpty() ? "" : " " + zip);
+
         addRow("Guest Identity:", fname + " " + lname, y); y += 40;
-        addRow("Residence:", add1 + ", " + add2 + ", " + city + ", " + state + " " + zip, y); y += 40;
+        addRow("Residence:", fullAddress, y); y += 40;
         addRow("Contact:", email + " | " + phone, y); y += 40;
         
         y += 10; 
 
         addRow("Check-in:", indate + " at " + intime, y); y += 40;
         addRow("Check-out:", outdate + " at " + outtime, y); y += 40;
-        addRow("Accommodation:", roomPref + " (" + adults + " Adults, " + children + " Children)", y); y += 45;
+        
+        
+        String roomDisplay = (roomNumberField != null && !roomNumberField.isEmpty())
+                ? roomPref + " [Room " + roomNumberField + "]"
+                : roomPref;
+
+        addRow("Accommodation:", roomDisplay + " (" + adults + " Adults, " + children + " Children)", y); y += 45;
 
         reqLbl = new JLabel("Special Requests:");
         reqLbl.setFont(new Font("Segoe UI", Font.BOLD, 14));
@@ -85,7 +101,6 @@ public class SummaryPage extends JFrame implements ActionListener {
         add(scroll);
         y += 100;
 
-        
         cancel = new JButton("Cancel Reservation");
         cancel.setBackground(new Color(245, 245, 245)); 
         cancel.setForeground(Color.DARK_GRAY);
@@ -110,7 +125,6 @@ public class SummaryPage extends JFrame implements ActionListener {
         setVisible(true);
     }
 
-    
     private void addRow(String header, String data, int y) {
         JLabel headerLbl = new JLabel(header);
         headerLbl.setFont(new Font("Segoe UI", Font.BOLD, 14));
@@ -124,7 +138,6 @@ public class SummaryPage extends JFrame implements ActionListener {
         dataLbl.setBounds(215, y, 460, 25);
         add(dataLbl);
         
-        
         JSeparator line = new JSeparator();
         line.setBounds(75, y + 30, 600, 1);
         line.setForeground(new Color(245, 245, 245));
@@ -133,9 +146,10 @@ public class SummaryPage extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == done) {
-            this.dispose();
-            new payment().setVisible(true);
+     if (e.getSource() == done) {
+    this.dispose();
+    new payment(roomTypeField, roomNumberField).setVisible(true);
+
         } else if (e.getSource() == cancel) {
             int response = JOptionPane.showConfirmDialog(this, 
                 "Are you sure you want to cancel your reservation?", 

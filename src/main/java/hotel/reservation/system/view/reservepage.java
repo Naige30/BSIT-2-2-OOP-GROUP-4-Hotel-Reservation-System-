@@ -1,4 +1,5 @@
 package hotel.reservation.system.view;
+
 import hotel.reservation.system.model.Room;
 import hotel.reservation.system.view.SummaryPage;
 import java.awt.*;
@@ -8,6 +9,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.border.MatteBorder;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class reservepage extends JFrame implements ActionListener {
     private JButton submit, cancel;
@@ -22,8 +27,23 @@ public class reservepage extends JFrame implements ActionListener {
     JTextArea y;
     JPanel leftLine, rightLine;
     private JLabel headline, welcometxt;
+    
+    
+    private String targetedRoomNumber; 
 
+    
     public reservepage() {
+        this("", "");
+    }
+
+   
+    public reservepage(String selectedRoomType) {
+        this(selectedRoomType, "");
+    }
+
+   
+    public reservepage(String selectedRoomType, String selectedRoomNumber) {
+        this.targetedRoomNumber = selectedRoomNumber;
         
         setSize(1000, 975);
         setTitle("Giovanni Madrigal Grand Hotel: A Hotel Reservation System");
@@ -40,7 +60,12 @@ public class reservepage extends JFrame implements ActionListener {
         headline.setBounds(0, 0, 1000, 250);
         add(headline);
 
-        welcometxt = new JLabel("Reservation Details", SwingConstants.CENTER);
+        // UPDATED: Dynamically changes text to show the designated room number to the customer!
+        String titleText = (targetedRoomNumber != null && !targetedRoomNumber.isEmpty()) 
+                ? "Reservation Details (Room " + targetedRoomNumber + ")" 
+                : "Reservation Details";
+                
+        welcometxt = new JLabel(titleText, SwingConstants.CENTER);
         welcometxt.setFont(new Font("Serif", Font.ITALIC, 22));
         welcometxt.setBounds(350, 280, 300, 40);
         add(welcometxt);
@@ -67,7 +92,6 @@ public class reservepage extends JFrame implements ActionListener {
         contactEmail.setBounds(700, 250, 200, 25);
         add(contactEmail);
 
-        
         ImageIcon userIconRaw = new ImageIcon(getClass().getResource("/user.png"));
         Image userScaled = userIconRaw.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         fname = new JLabel("FIRST NAME", new ImageIcon(userScaled), SwingConstants.LEFT);
@@ -80,7 +104,6 @@ public class reservepage extends JFrame implements ActionListener {
         fld1.setBounds(100, 365, 385, 25);
         add(fld1);
 
-        
         ImageIcon userIconRaw2 = new ImageIcon(getClass().getResource("/user2.png"));
         Image userScaled2 = userIconRaw2.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         lname = new JLabel("LAST NAME", new ImageIcon(userScaled2), SwingConstants.LEFT);
@@ -93,7 +116,6 @@ public class reservepage extends JFrame implements ActionListener {
         fld2.setBounds(515, 365, 385, 25);
         add(fld2);
 
-        
         ImageIcon addressIconRaw = new ImageIcon(getClass().getResource("/address.png"));
         Image addressScaled = addressIconRaw.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         add1 = new JLabel("ADDRESS", new ImageIcon(addressScaled), SwingConstants.LEFT);
@@ -106,7 +128,6 @@ public class reservepage extends JFrame implements ActionListener {
         fld3.setBounds(100, 430, 800, 25);
         add(fld3);
 
-        
         ImageIcon cityIconRaw = new ImageIcon(getClass().getResource("/address2.png"));
         Image cityScaled = cityIconRaw.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         city = new JLabel("CITY", new ImageIcon(cityScaled), SwingConstants.LEFT);
@@ -119,7 +140,6 @@ public class reservepage extends JFrame implements ActionListener {
         fld5.setBounds(100, 500, 250, 25);
         add(fld5);
 
-        
         ImageIcon stateIconRaw = new ImageIcon(getClass().getResource("/address3.png"));
         Image stateScaled = stateIconRaw.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         state = new JLabel("STATE", new ImageIcon(stateScaled), SwingConstants.LEFT);
@@ -132,7 +152,6 @@ public class reservepage extends JFrame implements ActionListener {
         fld6.setBounds(375, 500, 250, 25);
         add(fld6);
 
-        
         ImageIcon zipIconRaw = new ImageIcon(getClass().getResource("/address4.png"));
         Image zipScaled = zipIconRaw.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         zip = new JLabel("ZIP CODE", new ImageIcon(zipScaled), SwingConstants.LEFT);
@@ -145,7 +164,6 @@ public class reservepage extends JFrame implements ActionListener {
         fld7.setBounds(650, 500, 250, 25);
         add(fld7);
 
-        
         ImageIcon phoneIconRaw = new ImageIcon(getClass().getResource("/phone.png"));
         Image phoneScaled = phoneIconRaw.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         phone = new JLabel("PHONE NUMBER", new ImageIcon(phoneScaled), SwingConstants.LEFT);
@@ -158,7 +176,6 @@ public class reservepage extends JFrame implements ActionListener {
         fld8.setBounds(100, 570, 385, 25);
         add(fld8);
 
-        
         ImageIcon emailIconRaw = new ImageIcon(getClass().getResource("/email.png"));
         Image emailScaled = emailIconRaw.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         email = new JLabel("E-MAIL ADDRESS", new ImageIcon(emailScaled), SwingConstants.LEFT);
@@ -171,7 +188,6 @@ public class reservepage extends JFrame implements ActionListener {
         fld9.setBounds(515, 570, 385, 25);
         add(fld9);
 
-        
         ArrayList<String> dateList = new ArrayList<>();
         LocalDate startDate = LocalDate.of(2026, 5, 17);
         LocalDate endDate = LocalDate.of(2027, 12, 31);
@@ -182,8 +198,8 @@ public class reservepage extends JFrame implements ActionListener {
             dateList.add(String.format("%02d/%02d/%d", month, day, year));
             startDate = startDate.plusDays(1);
         }
-        String[] datesArray = dateList.toArray(new String[0]);
-
+        
+        String[] datesArray = dateList.toArray(new String[31]);
 
         String[] hours = new String[12];
         for (int i = 1; i <= 12; i++) hours[i - 1] = String.format("%02d", i);
@@ -289,7 +305,6 @@ public class reservepage extends JFrame implements ActionListener {
         ButtonGroup group = new ButtonGroup();
         group.add(standard); group.add(deluxe); group.add(suite); group.add(luh);
 
-        
         ImageIcon adultIconRaw = new ImageIcon(getClass().getResource("/adults.png"));
         Image adultScaled = adultIconRaw.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         adult = new JLabel("NUMBER OF ADULTS", new ImageIcon(adultScaled), SwingConstants.LEFT);
@@ -302,7 +317,6 @@ public class reservepage extends JFrame implements ActionListener {
         fld14.setBounds(515, 710, 185, 25);
         add(fld14);
 
-        
         ImageIcon childIconRaw = new ImageIcon(getClass().getResource("/childrens.png"));
         Image childScaled = childIconRaw.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         child = new JLabel("NUMBER OF CHILDREN", new ImageIcon(childScaled), SwingConstants.LEFT);
@@ -315,7 +329,6 @@ public class reservepage extends JFrame implements ActionListener {
         fld15.setBounds(715, 710, 185, 25);
         add(fld15);
 
-        
         ImageIcon specialIconRaw = new ImageIcon(getClass().getResource("/instructions.png")); 
         Image specialScaled = specialIconRaw.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         x = new JLabel("SPECIAL INSTRUCTIONS", new ImageIcon(specialScaled), SwingConstants.LEFT);
@@ -346,6 +359,11 @@ public class reservepage extends JFrame implements ActionListener {
         submit.addActionListener(this);
         cancel.addActionListener(this);
         
+        if (selectedRoomType.equalsIgnoreCase("Tuazon Deluxe")) standard.setSelected(true);
+        else if (selectedRoomType.equalsIgnoreCase("Grande Aviles")) deluxe.setSelected(true);
+        else if (selectedRoomType.equalsIgnoreCase("Casa Lacao")) suite.setSelected(true);
+        else if (selectedRoomType.equalsIgnoreCase("Palazzo Arzola")) luh.setSelected(true);
+
         setVisible(true);
     }
 
@@ -372,21 +390,53 @@ public class reservepage extends JFrame implements ActionListener {
             else if (suite.isSelected()) roomPref = "Casa Lacao";
             else if (luh.isSelected()) roomPref = "Palazzo Arzola";
 
-            
             String selectedInDate = (String) inDateCombo.getSelectedItem();
             String selectedInTime = inHourCombo.getSelectedItem() + ":" + inMinCombo.getSelectedItem() + " " + inAmPmCombo.getSelectedItem();
             String selectedOutDate = (String) outDateCombo.getSelectedItem();
             String selectedOutTime = outHourCombo.getSelectedItem() + ":" + outMinCombo.getSelectedItem() + " " + outAmPmCombo.getSelectedItem();
 
-            JOptionPane.showMessageDialog(this, "Reservation Added!");
-            this.dispose();
             
-            new SummaryPage(
-                fld1.getText(), fld2.getText(), fld3.getText(), "",
-                fld5.getText(), fld6.getText(), fld7.getText(), fld8.getText(),
-                fld9.getText(), selectedInDate, selectedInTime, selectedOutDate,
-                selectedOutTime, roomPref, fld14.getText(), fld15.getText(), y.getText()
-            ).setVisible(true);
+            int currentUserId = hotel.reservation.system.model.Session.currentUserId;
+            
+            
+            if (reserveRoomInDatabase(targetedRoomNumber, currentUserId)) {
+                JOptionPane.showMessageDialog(this, "Reservation Added!");
+                this.dispose();
+                
+                new SummaryPage(
+                    fld1.getText(), fld2.getText(), fld3.getText(), targetedRoomNumber,
+                    fld5.getText(), fld6.getText(), fld7.getText(), fld8.getText(),
+                    fld9.getText(), selectedInDate, selectedInTime, selectedOutDate,
+                    selectedOutTime, roomPref, fld14.getText(), fld15.getText(), y.getText()
+                ).setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(this, "Database Error: Could not reserve this room. It may already be taken.", "Booking Failed", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
+   
+    private boolean reserveRoomInDatabase(String roomNumber, int userId) {
+        if (roomNumber == null || roomNumber.trim().isEmpty()) {
+            return true; 
+        }
+
+        String dbUrl = "jdbc:mysql://localhost:3306/hotel_db";
+        String dbUser = "root";
+        String dbPass = "";
+        String query = "UPDATE rooms SET status = 'Reserved', user_id = ? WHERE room_number = ?";
+
+        try (Connection conn = DriverManager.getConnection(dbUrl, dbUser, dbPass);
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            
+            stmt.setInt(1, userId);
+            stmt.setString(2, roomNumber.trim());
+            
+            return stmt.executeUpdate() > 0;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
         }
     }
 }
