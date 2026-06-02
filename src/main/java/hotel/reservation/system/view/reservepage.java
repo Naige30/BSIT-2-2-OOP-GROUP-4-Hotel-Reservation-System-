@@ -12,6 +12,7 @@ import javax.swing.border.MatteBorder;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class reservepage extends JFrame implements ActionListener {
@@ -28,20 +29,16 @@ public class reservepage extends JFrame implements ActionListener {
     JPanel leftLine, rightLine;
     private JLabel headline, welcometxt;
     
-    
     private String targetedRoomNumber; 
 
-    
     public reservepage() {
         this("", "");
     }
 
-   
     public reservepage(String selectedRoomType) {
         this(selectedRoomType, "");
     }
 
-   
     public reservepage(String selectedRoomType, String selectedRoomNumber) {
         this.targetedRoomNumber = selectedRoomNumber;
         
@@ -60,7 +57,6 @@ public class reservepage extends JFrame implements ActionListener {
         headline.setBounds(0, 0, 1000, 250);
         add(headline);
 
-        // UPDATED: Dynamically changes text to show the designated room number to the customer!
         String titleText = (targetedRoomNumber != null && !targetedRoomNumber.isEmpty()) 
                 ? "Reservation Details (Room " + targetedRoomNumber + ")" 
                 : "Reservation Details";
@@ -199,7 +195,8 @@ public class reservepage extends JFrame implements ActionListener {
             startDate = startDate.plusDays(1);
         }
         
-        String[] datesArray = dateList.toArray(new String[31]);
+       
+        String[] datesArray = dateList.toArray(new String[0]);
 
         String[] hours = new String[12];
         for (int i = 1; i <= 12; i++) hours[i - 1] = String.format("%02d", i);
@@ -257,6 +254,7 @@ public class reservepage extends JFrame implements ActionListener {
 
         outHourCombo = new JComboBox<>(hours);
         outHourCombo.setBounds(715, 640, 50, 25);
+        outHourCombo.setBackground(Color.WHITE);
         outHourCombo.setBackground(Color.WHITE);
         add(outHourCombo);
 
@@ -395,14 +393,11 @@ public class reservepage extends JFrame implements ActionListener {
             String selectedOutDate = (String) outDateCombo.getSelectedItem();
             String selectedOutTime = outHourCombo.getSelectedItem() + ":" + outMinCombo.getSelectedItem() + " " + outAmPmCombo.getSelectedItem();
 
-            
             int currentUserId = hotel.reservation.system.model.Session.currentUserId;
-            
-            
+           
             if (reserveRoomInDatabase(targetedRoomNumber, currentUserId)) {
-                JOptionPane.showMessageDialog(this, "Reservation Added!");
+                JOptionPane.showMessageDialog(this, "Reservation Secured in System! Proceeding to Summary...");
                 this.dispose();
-                
                 new SummaryPage(
                     fld1.getText(), fld2.getText(), fld3.getText(), targetedRoomNumber,
                     fld5.getText(), fld6.getText(), fld7.getText(), fld8.getText(),
@@ -410,29 +405,58 @@ public class reservepage extends JFrame implements ActionListener {
                     selectedOutTime, roomPref, fld14.getText(), fld15.getText(), y.getText()
                 ).setVisible(true);
             } else {
-                JOptionPane.showMessageDialog(this, "Database Error: Could not reserve this room. It may already be taken.", "Booking Failed", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Database Error: This specific room layout assignment failed.", "Booking Failed", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
 
-   
-    private boolean reserveRoomInDatabase(String roomNumber, int userId) {
-        if (roomNumber == null || roomNumber.trim().isEmpty()) {
-            return true; 
-        }
-
+   private boolean reserveRoomInDatabase(String roomNumber, int userId) {
         String dbUrl = "jdbc:mysql://localhost:3306/hotel_db";
         String dbUser = "root";
         String dbPass = "";
-        String query = "UPDATE rooms SET status = 'Reserved', user_id = ? WHERE room_number = ?";
 
+  
+        String activeTypePreference = "";
+        if (standard.isSelected()) activeTypePreference = "Tuazon Deluxe";
+        else if (deluxe.isSelected()) activeTypePreference = "Grande Aviles";
+        else if (suite.isSelected()) activeTypePreference = "Casa Lacao";
+        else if (luh.isSelected()) activeTypePreference = "Palazzo Arzola";
+
+      
+        if (roomNumber == null || roomNumber.trim().isEmpty()) {
+            String findRoomQuery = "SELECT room_number FROM rooms WHERE room_type = ? AND status = 'Available' LIMIT 1";
+            
+            try (Connection conn = DriverManager.getConnection(dbUrl, dbUser, dbPass);
+                 PreparedStatement selectStmt = conn.prepareStatement(findRoomQuery)) {
+                
+                selectStmt.setString(1, activeTypePreference);
+                try (ResultSet rs = selectStmt.executeQuery()) {
+                    if (rs.next()) {
+                        roomNumber = rs.getString("room_number");
+                        this.targetedRoomNumber = roomNumber; 
+                    } else {
+                        JOptionPane.showMessageDialog(this, 
+                            "We are sorry! No available rooms are left for the " + activeTypePreference + " category.", 
+                            "Fully Booked", 
+                            JOptionPane.WARNING_MESSAGE);
+                        return false;
+                    }
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+                return false;
+            }
+        }
+
+        
+        String updateQuery = "UPDATE rooms SET status = 'Reserved', user_id = ? WHERE room_number = ? AND status = 'Available'";
         try (Connection conn = DriverManager.getConnection(dbUrl, dbUser, dbPass);
-             PreparedStatement stmt = conn.prepareStatement(query)) {
+             PreparedStatement updateStmt = conn.prepareStatement(updateQuery)) {
             
-            stmt.setInt(1, userId);
-            stmt.setString(2, roomNumber.trim());
+            updateStmt.setInt(1, userId);
+            updateStmt.setString(2, roomNumber.trim());
             
-            return stmt.executeUpdate() > 0;
+            return updateStmt.executeUpdate() > 0;
 
         } catch (SQLException ex) {
             ex.printStackTrace();
