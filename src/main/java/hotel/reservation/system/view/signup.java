@@ -13,7 +13,7 @@ import java.sql.SQLException;
 
 public class signup extends JFrame implements ActionListener {
    
-    private JButton submitbtn;    
+    private JButton submitbtn, cancelbtn;    
     private JPasswordField passinp; 
     private JComboBox<String> monthBox, dayBox, yearBox;
     private JTextField userinp, emailinp, numberinp;
@@ -147,6 +147,16 @@ public class signup extends JFrame implements ActionListener {
         submitbtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
         add(submitbtn);
         submitbtn.addActionListener(this);
+        
+        cancelbtn = new JButton("Back");
+        cancelbtn.setFont(new Font("SansSerif", Font.BOLD, 14));
+        cancelbtn.setBackground(new Color(69, 104, 130));
+        cancelbtn.setForeground(Color.WHITE);
+        cancelbtn.setFocusPainted(false);
+        cancelbtn.setBounds(40, 535, 320, 45);
+        cancelbtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        add(cancelbtn);
+        cancelbtn.addActionListener(this);
     }
 
     private String getMonthNumber(String monthName) {
@@ -214,6 +224,11 @@ public class signup extends JFrame implements ActionListener {
             } else {
                 JOptionPane.showMessageDialog(this, "Error: Username may be taken or connection failed.", "Signup Failed", JOptionPane.ERROR_MESSAGE);
             }
+        }
+        else if(e.getSource()==cancelbtn){
+            dispose();
+            loginpage lp=new loginpage();
+            lp.setVisible(true);
         }
     }
 }
