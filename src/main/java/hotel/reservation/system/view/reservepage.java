@@ -5,6 +5,8 @@ import hotel.reservation.system.view.SummaryPage;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.*;
@@ -235,6 +237,26 @@ public class reservepage extends JFrame implements ActionListener {
         yr1.setBounds(255, 640, 75, 25);
         add(yr1);
         
+       yr1.addFocusListener(new FocusListener() {
+
+        @Override
+
+        public void focusGained(FocusEvent e) {
+
+            if (yr1.getText().equals("Year")) {
+                yr1.setText("");
+                yr1.setForeground(Color.BLACK);
+            }
+        }
+
+        @Override
+        public void focusLost(FocusEvent e) {
+            if (yr1.getText().isEmpty()) {
+                yr1.setForeground(Color.GRAY);
+                yr1.setText("Year");
+            }
+        }
+    });
         inHourCombo = new JComboBox<>(hours);
         inHourCombo.setBounds(335, 640, 50, 25);
         inHourCombo.setBackground(Color.WHITE);
@@ -275,6 +297,27 @@ public class reservepage extends JFrame implements ActionListener {
         yr2 = new JTextField("Year");
         yr2.setBounds(670, 640, 75, 25);
         add(yr2);
+        
+        yr2.addFocusListener(new FocusListener() {
+
+        @Override
+
+        public void focusGained(FocusEvent e) {
+
+            if (yr2.getText().equals("Year")) {
+                yr2.setText("");
+                yr2.setForeground(Color.BLACK);
+            }
+        }
+
+        @Override
+        public void focusLost(FocusEvent e) {
+            if (yr2.getText().isEmpty()) {
+                yr2.setForeground(Color.GRAY);
+                yr2.setText("Year");
+            }
+        }
+    });
         
         outHourCombo = new JComboBox<>(hours);
         outHourCombo.setBounds(750, 640, 50, 25);
@@ -418,9 +461,9 @@ public class reservepage extends JFrame implements ActionListener {
                 
                 Long.parseLong(phone);
                 
-                if (phone.length() < 11) {
-                    throw new IllegalArgumentException("Phone number incomplete.");
-                }
+                if (phone.length() != 11) {
+                    throw new IllegalArgumentException("Phone number must be 11 digits only.");
+                } 
                 
                 String email = fld9.getText().trim();
                 
