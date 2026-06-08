@@ -20,8 +20,9 @@ public class reservepage extends JFrame implements ActionListener {
     JLabel fname, lname, add1, city, state, zip, phone, email, 
             indate, outdate, pref, adult, child, x, contactPhone, contactEmail;
     JTextField fld1, fld2, fld3, fld5, fld6, fld7, fld8, fld9, fld14, fld15;
+    JTextField yr1, yr2;
     JComboBox<String> inDateCombo, outDateCombo;
-    JComboBox<String> inHourCombo, inMinCombo, inAmPmCombo;
+    JComboBox<String> inHourCombo, inMinCombo, inAmPmCombo, day1, day2;
     JComboBox<String> outHourCombo, outMinCombo, outAmPmCombo;
     JLabel colonLabel1, colonLabel2;
     JRadioButton standard, deluxe, suite, luh;
@@ -138,7 +139,7 @@ public class reservepage extends JFrame implements ActionListener {
 
         ImageIcon stateIconRaw = new ImageIcon(getClass().getResource("/address3.png"));
         Image stateScaled = stateIconRaw.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
-        state = new JLabel("STATE", new ImageIcon(stateScaled), SwingConstants.LEFT);
+        state = new JLabel("PROVINCE", new ImageIcon(stateScaled), SwingConstants.LEFT);
         state.setIconTextGap(5);
         state.setFont(new Font("SansSerif", Font.BOLD, 10));
         state.setBounds(375, 475, 100, 20);
@@ -167,10 +168,12 @@ public class reservepage extends JFrame implements ActionListener {
         phone.setFont(new Font("SansSerif", Font.BOLD, 10));
         phone.setBounds(100, 545, 150, 20);
         add(phone);
-
+        
         fld8 = new JTextField();
         fld8.setBounds(100, 570, 385, 25);
         add(fld8);
+        
+            
 
         ImageIcon emailIconRaw = new ImageIcon(getClass().getResource("/email.png"));
         Image emailScaled = emailIconRaw.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
@@ -184,7 +187,8 @@ public class reservepage extends JFrame implements ActionListener {
         fld9.setBounds(515, 570, 385, 25);
         add(fld9);
 
-        ArrayList<String> dateList = new ArrayList<>();
+        //gamitin in case mali gawa ko hehehehe
+       /* ArrayList<String> dateList = new ArrayList<>();
         LocalDate startDate = LocalDate.of(2026, 5, 17);
         LocalDate endDate = LocalDate.of(2027, 12, 31);
         while (!startDate.isAfter(endDate)) {
@@ -193,11 +197,15 @@ public class reservepage extends JFrame implements ActionListener {
             int year = startDate.getYear();
             dateList.add(String.format("%02d/%02d/%d", month, day, year));
             startDate = startDate.plusDays(1);
-        }
+        }*/
         
        
-        String[] datesArray = dateList.toArray(new String[0]);
-
+        String[] months = {"January", "February", "March", "April", "May", "June", 
+                   "July", "August", "September", "October", "November", "December"};
+        
+        String[] days = new String[31];
+        for (int i = 1; i <= 31; i++) days[i-1] = String.format("%02d", i);
+        
         String[] hours = new String[12];
         for (int i = 1; i <= 12; i++) hours[i - 1] = String.format("%02d", i);
 
@@ -214,28 +222,36 @@ public class reservepage extends JFrame implements ActionListener {
         indate.setBounds(100, 615, 200, 20);
         add(indate);
 
-        inDateCombo = new JComboBox<>(datesArray);
-        inDateCombo.setBounds(100, 640, 185, 25);
+        inDateCombo = new JComboBox<>(months);
+        inDateCombo.setBounds(100, 640, 100, 25);
         inDateCombo.setBackground(Color.WHITE);
         add(inDateCombo);
-
+        
+        day1 = new JComboBox<>(days);
+        day1.setBounds(200, 640, 50, 25);
+        add(day1);
+        
+        yr1 = new JTextField("Year");
+        yr1.setBounds(255, 640, 75, 25);
+        add(yr1);
+        
         inHourCombo = new JComboBox<>(hours);
-        inHourCombo.setBounds(300, 640, 50, 25);
+        inHourCombo.setBounds(335, 640, 50, 25);
         inHourCombo.setBackground(Color.WHITE);
         add(inHourCombo);
 
         colonLabel1 = new JLabel(":", SwingConstants.CENTER);
         colonLabel1.setFont(new Font("SansSerif", Font.BOLD, 14));
-        colonLabel1.setBounds(350, 640, 10, 25);
+        colonLabel1.setBounds(370, 640, 10, 25);
         add(colonLabel1);
 
         inMinCombo = new JComboBox<>(minutes);
-        inMinCombo.setBounds(360, 640, 50, 25);
+        inMinCombo.setBounds(385, 640, 50, 25);
         inMinCombo.setBackground(Color.WHITE);
         add(inMinCombo);
 
         inAmPmCombo = new JComboBox<>(ampm);
-        inAmPmCombo.setBounds(415, 640, 70, 25);
+        inAmPmCombo.setBounds(435, 640, 70, 25);
         inAmPmCombo.setBackground(Color.WHITE);
         add(inAmPmCombo);
 
@@ -247,29 +263,37 @@ public class reservepage extends JFrame implements ActionListener {
         outdate.setBounds(515, 615, 200, 20);
         add(outdate);
 
-        outDateCombo = new JComboBox<>(datesArray);
-        outDateCombo.setBounds(515, 640, 185, 25);
+        outDateCombo = new JComboBox<>(months);
+        outDateCombo.setBounds(515, 640, 100, 25);
         outDateCombo.setBackground(Color.WHITE);
         add(outDateCombo);
-
+       
+        day2 = new JComboBox<>(days);
+        day2.setBounds(615, 640, 50, 25);
+        add(day2);
+        
+        yr2 = new JTextField("Year");
+        yr2.setBounds(670, 640, 75, 25);
+        add(yr2);
+        
         outHourCombo = new JComboBox<>(hours);
-        outHourCombo.setBounds(715, 640, 50, 25);
+        outHourCombo.setBounds(750, 640, 50, 25);
         outHourCombo.setBackground(Color.WHITE);
         outHourCombo.setBackground(Color.WHITE);
         add(outHourCombo);
 
         colonLabel2 = new JLabel(":", SwingConstants.CENTER);
         colonLabel2.setFont(new Font("SansSerif", Font.BOLD, 14));
-        colonLabel2.setBounds(765, 640, 10, 25);
+        colonLabel2.setBounds(785, 640, 10, 25);
         add(colonLabel2);
 
         outMinCombo = new JComboBox<>(minutes);
-        outMinCombo.setBounds(775, 640, 50, 25);
+        outMinCombo.setBounds(800, 640, 50, 25);
         outMinCombo.setBackground(Color.WHITE);
         add(outMinCombo);
 
         outAmPmCombo = new JComboBox<>(ampm);
-        outAmPmCombo.setBounds(830, 640, 70, 25);
+        outAmPmCombo.setBounds(850, 640, 70, 25);
         outAmPmCombo.setBackground(Color.WHITE);
         add(outAmPmCombo);
         
@@ -367,6 +391,9 @@ public class reservepage extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        
+        boolean isValid = false;
+        
         if (e.getSource() == cancel) {
             this.dispose();
             new hotelmenu().setVisible(true);
@@ -381,6 +408,126 @@ public class reservepage extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(this, "Please complete required fields.");
                 return;
             }
+            
+            try {
+                String phone = fld8.getText().trim();
+                
+                if (phone.isEmpty()) {
+                    throw new IllegalArgumentException("Contact number cannot be empty.");
+                }
+                
+                Long.parseLong(phone);
+                
+                if (phone.length() < 11) {
+                    throw new IllegalArgumentException("Phone number incomplete.");
+                }
+                
+                String email = fld9.getText().trim();
+                
+                if (email.isEmpty()) {
+                    throw new IllegalArgumentException("Email address cannot be empty");
+                }
+                
+                if (!email.contains("@") || !email.contains(".")) {
+                    throw new IllegalArgumentException("Please enter a valid email format.");
+                }
+                
+                int inMonth = inDateCombo.getSelectedIndex() + 1;
+                int inDay = Integer.parseInt((String) day1.getSelectedItem());
+                int inYear;
+                
+                int outMonth = outDateCombo.getSelectedIndex() + 1;
+                int outDay = Integer.parseInt((String) day2.getSelectedItem());
+                int outYear;
+                
+                try {
+                    inYear = Integer.parseInt(yr1.getText().trim());
+                } catch (NumberFormatException en) {
+                    throw new IllegalArgumentException("Invalid check-in year format.");
+                }
+
+                try {
+                    outYear = Integer.parseInt(yr2.getText().trim());
+                } catch (NumberFormatException en) {
+                    throw new IllegalArgumentException("Invalid check-out year format.");
+                }
+                
+                java.time.LocalDate checkInDate = java.time.LocalDate.of(inYear, inMonth, inDay);
+                java.time.LocalDate checkOutDate = java.time.LocalDate.of(outYear, outMonth, outDay);
+                
+                if (checkOutDate.isBefore(checkInDate)) {
+                    throw new IllegalArgumentException("Check-out date cannot be earlier than your check-in date.");
+                }
+                
+                if (checkInDate.isEqual(checkOutDate)) {
+                    int inHour = inHourCombo.getSelectedIndex() + 1; 
+                    int outHour = outHourCombo.getSelectedIndex() + 1;
+
+                if (inAmPmCombo.getSelectedIndex() == 1 && inHour != 12) inHour += 12;
+                if (inAmPmCombo.getSelectedIndex() == 0 && inHour == 12) inHour = 0;
+
+                if (outAmPmCombo.getSelectedIndex() == 1 && outHour != 12) outHour += 12;
+                if (outAmPmCombo.getSelectedIndex() == 0 && outHour == 12) outHour = 0;
+
+                int inMinute = inMinCombo.getSelectedIndex();
+                int outMinute = outMinCombo.getSelectedIndex();
+
+                int totalInMinutes = (inHour * 60) + inMinute;
+                int totalOutMinutes = (outHour * 60) + outMinute;
+
+                if (totalOutMinutes <= totalInMinutes) {
+                    throw new IllegalArgumentException("Check-out time must be after your check-in time on the same day.");
+                }
+              }
+                
+            isValid = true;
+            
+            } catch (NumberFormatException ex) {
+                    String input = fld8.getText().trim();
+                    JOptionPane.showMessageDialog(this, 
+                        "Invalid format of phone number: [" + input + "]", 
+                        "Input Error.", 
+                        JOptionPane.ERROR_MESSAGE);
+
+                    fld8.requestFocus();
+                    return;
+
+            } catch (java.time.DateTimeException ex) {
+                    JOptionPane.showMessageDialog(this, 
+                        "The selected date configuration does not exist. Please check your month and day combinations.", 
+                        "Date Error", 
+                        javax.swing.JOptionPane.ERROR_MESSAGE);
+                    
+                    inDateCombo.requestFocus();
+                    return;
+                    
+            } catch(IllegalArgumentException ex){
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Input Error.", JOptionPane.ERROR_MESSAGE);
+                
+                String msg = ex.getMessage().toLowerCase();
+                
+            if (msg.contains("phone") || msg.contains("contact")) {
+                fld8.requestFocus();
+            } else if (msg.contains("email")) {
+                fld9.requestFocus();
+            } else if (msg.contains("check-in year")) { 
+                yr1.requestFocus();
+            } else if (msg.contains("check-out year")) {
+                yr2.requestFocus();
+            } else if (msg.contains("check-out")) {
+                outDateCombo.requestFocus(); 
+            } else {
+                    inDateCombo.requestFocus();
+            }
+                
+                return;
+                    
+            }
+            
+            if (isValid) {
+                JOptionPane.showMessageDialog(this, "Please wait...", "Success", JOptionPane.INFORMATION_MESSAGE);
+            }
+          
 
             String roomPref = "";
             if (standard.isSelected()) roomPref = "Tuazon Deluxe";
@@ -405,7 +552,7 @@ public class reservepage extends JFrame implements ActionListener {
                     selectedOutTime, roomPref, fld14.getText(), fld15.getText(), y.getText()
                 ).setVisible(true);
             } else {
-                JOptionPane.showMessageDialog(this, "Database Error: This specific room layout assignment failed.", "Booking Failed", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Please input your preferred room.", "Booking Failed", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
