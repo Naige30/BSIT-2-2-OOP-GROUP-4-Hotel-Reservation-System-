@@ -11,6 +11,11 @@ CREATE TABLE `users` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 );
 
+INSERT INTO `users`
+(`id`, `username`, `password`, `email`, `contact_number`, `birthdate`)
+VALUES
+(1, 'admin', 'admin123', 'admin@hotel.com', '09123456789', '2000-01-01');
+
 CREATE TABLE `rooms` (
   `id` int(11) NOT NULL,
   `room_number` varchar(10) NOT NULL,
@@ -55,7 +60,7 @@ ALTER TABLE `rooms`
   ADD KEY `user_id` (`user_id`);
 
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 ALTER TABLE `rooms`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
