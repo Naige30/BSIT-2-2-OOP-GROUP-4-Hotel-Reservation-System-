@@ -167,10 +167,12 @@ public class reservepage extends JFrame implements ActionListener {
         phone.setFont(new Font("SansSerif", Font.BOLD, 10));
         phone.setBounds(100, 545, 150, 20);
         add(phone);
-
+        
         fld8 = new JTextField();
         fld8.setBounds(100, 570, 385, 25);
         add(fld8);
+        
+            
 
         ImageIcon emailIconRaw = new ImageIcon(getClass().getResource("/email.png"));
         Image emailScaled = emailIconRaw.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
@@ -367,6 +369,7 @@ public class reservepage extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        boolean isValid = false;
         if (e.getSource() == cancel) {
             this.dispose();
             new hotelmenu().setVisible(true);
@@ -381,6 +384,88 @@ public class reservepage extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(this, "Please complete required fields.");
                 return;
             }
+            
+            try {
+                String phone = fld8.getText().trim();
+                
+                if (phone.isEmpty()) {
+                    throw new IllegalArgumentException("Contact number cannot be empty.");
+                }
+                
+                Long.parseLong(phone);
+                
+                if (phone.length() < 11) {
+                    throw new IllegalArgumentException("Phone number incomplete.");
+                }
+                
+                String email = fld9.getText().trim();
+                
+                if (email.isEmpty()) {
+                    throw new IllegalArgumentException("Email address cannot be empty");
+                }
+                
+                if (!email.contains("@") || !email.contains(".")) {
+                    throw new IllegalArgumentException("Please enter a valid email format.");
+                }
+                
+                int checkInIndex = inDateCombo.getSelectedIndex();
+                int checkOutIndex = outDateCombo.getSelectedIndex();
+
+                if (checkOutIndex < checkInIndex) {
+                    throw new IllegalArgumentException("Check-out date cannot be earlier than your check-in date.");
+                } 
+
+                if (checkInIndex == checkOutIndex) {
+                    int inHour = inHourCombo.getSelectedIndex() + 1; 
+                    int outHour = outHourCombo.getSelectedIndex() + 1;
+
+                    if (inAmPmCombo.getSelectedIndex() == 1 && inHour != 12) inHour += 12;
+                    if (inAmPmCombo.getSelectedIndex() == 0 && inHour == 12) inHour = 0;
+
+                    if (outAmPmCombo.getSelectedIndex() == 1 && outHour != 12) outHour += 12;
+                    if (outAmPmCombo.getSelectedIndex() == 0 && outHour == 12) outHour = 0;
+
+                    int inMinute = inMinCombo.getSelectedIndex();
+                    int outMinute = outMinCombo.getSelectedIndex();
+
+                    int totalInMinutes = (inHour * 60) + inMinute;
+                    int totalOutMinutes = (outHour * 60) + outMinute;
+
+                    if (totalOutMinutes <= totalInMinutes) {
+                        throw new IllegalArgumentException("Check-out time must be after your check-in time on the same day.");
+                    }
+                }
+            } catch (NumberFormatException ex) {
+                    String input = fld8.getText().trim();
+                    JOptionPane.showMessageDialog(this, 
+                        "Invalid format of phone number: [" + input + "]", 
+                        "Input Error.", 
+                        JOptionPane.ERROR_MESSAGE);
+
+                    fld8.requestFocus();
+                    return;
+
+            } catch(IllegalArgumentException ex){
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Input Error.", JOptionPane.ERROR_MESSAGE);
+                
+                if (ex.getMessage().contains("Phone")) {
+                    fld8.requestFocus();
+                } else if (ex.getMessage().contains("Email")) {
+                    fld9.requestFocus();
+                } else if (ex.getMessage().contains("Check-out")) {
+                    outDateCombo.requestFocus(); 
+                } else {
+                    inDateCombo.requestFocus();
+                }
+                
+                return;
+                    
+            }
+            
+            if (isValid) {
+                JOptionPane.showMessageDialog(this, "Proceeding", "Success", JOptionPane.INFORMATION_MESSAGE);
+            }
+          
 
             String roomPref = "";
             if (standard.isSelected()) roomPref = "Tuazon Deluxe";
@@ -405,7 +490,7 @@ public class reservepage extends JFrame implements ActionListener {
                     selectedOutTime, roomPref, fld14.getText(), fld15.getText(), y.getText()
                 ).setVisible(true);
             } else {
-                JOptionPane.showMessageDialog(this, "Database Error: This specific room layout assignment failed.", "Booking Failed", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Please input your preferred room.", "Booking Failed", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
