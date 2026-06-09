@@ -1,0 +1,72 @@
+CREATE DATABASE hotel_db;
+USE hotel_db;
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `contact_number` varchar(20) DEFAULT NULL,
+  `birthdate` date DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+);
+
+INSERT INTO `users`
+(`id`, `username`, `password`, `email`, `contact_number`, `birthdate`)
+VALUES
+(1, 'admin', 'admin123', 'admin@hotel.com', '09123456789', '2000-01-01');
+
+CREATE TABLE `rooms` (
+  `id` int(11) NOT NULL,
+  `room_number` varchar(10) NOT NULL,
+  `room_type` varchar(255) NOT NULL,
+  `price` int(11) NOT NULL,
+  `status` ENUM('Available', 'Reserved', 'Occupied') NOT NULL DEFAULT 'Available',
+  `user_id` int(11) DEFAULT NULL
+);
+
+INSERT INTO `rooms` (`id`, `room_number`, `room_type`, `price`, `status`, `user_id`) VALUES
+(1, '101', 'Palazzo Arzola', 2500, 'Available', NULL),
+(2, '102', 'Palazzo Arzola', 2500, 'Available', NULL),
+(3, '104', 'Palazzo Arzola', 2500, 'Available', NULL),
+(4, '105', 'Palazzo Arzola', 2500, 'Available', NULL),
+
+(5, '201', 'Tuazon Deluxe', 1500, 'Available', NULL),
+(6, '202', 'Tuazon Deluxe', 1500, 'Available', NULL),
+(7, '203', 'Tuazon Deluxe', 1500, 'Available', NULL),
+(8, '204', 'Tuazon Deluxe', 1500, 'Available', NULL),
+(9, '205', 'Tuazon Deluxe', 1500, 'Available', NULL),
+
+(10, '301', 'Casa Lacao', 4000, 'Available', NULL),
+(11, '302', 'Casa Lacao', 4000, 'Available', NULL),
+(12, '303', 'Casa Lacao', 4000, 'Available', NULL),
+(13, '304', 'Casa Lacao', 4000, 'Available', NULL),
+(14, '305', 'Casa Lacao', 4000, 'Available', NULL),
+(15, '306', 'Casa Lacao', 4000, 'Available', NULL),
+
+(16, '401', 'Grande Aviles', 3000, 'Available', NULL),
+(17, '402', 'Grande Aviles', 3000, 'Available', NULL),
+(18, '403', 'Grande Aviles', 3000, 'Available', NULL),
+(19, '404', 'Grande Aviles', 3000, 'Available', NULL);
+
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`username`),
+  ADD UNIQUE KEY `email` (`email`);
+
+ALTER TABLE `rooms`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `room_number` (`room_number`),
+  ADD KEY `user_id` (`user_id`);
+
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+ALTER TABLE `rooms`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+ALTER TABLE `rooms`
+  ADD CONSTRAINT `rooms_ibfk_1`
+  FOREIGN KEY (`user_id`)
+  REFERENCES `users` (`id`)
+  ON DELETE SET NULL;
